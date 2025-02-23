@@ -1,15 +1,18 @@
 'use client'
 
 import { useEffect } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchFood } from "./lib/features/countSlice"
 
 export default function Main_Page() {
 
   const theFood = useSelector(state=>state.food)
-  const theDrink = useSelector(state=>state.drink)
+  const dispatch = useDispatch()
 
   useEffect(()=>{
-    console.log(theFood, theDrink, 'store')
+    if (!theFood) {
+      dispatch(fetchFood())
+    }
   },[])
 
   return(
