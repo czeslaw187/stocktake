@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchFood } from "../lib/features/countSlice"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ListGroup, ListGroupItem } from "reactstrap";
+import NavBar from "../Components/Navbar";
 
 export default function Main_Page() {
 
@@ -19,6 +20,7 @@ export default function Main_Page() {
   console.log(theFood, 'store')
   return(
     <div className="w-screen h-screen bg-gradient-to-br from-cyan-400 to-lime-200">
+      <NavBar />
       <ListGroup className="w-[80%] h-max">
         {
           theFood && theFood.map((el,id)=>{
