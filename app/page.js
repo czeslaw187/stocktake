@@ -18,8 +18,8 @@ export default function Main_Page() {
   
   console.log(theFood, 'store')
   return(
-    <div className="w-screen h-full bg-gradient-to-br from-cyan-400 to-lime-200">
-      <ListGroup className="w-[80%] h-[80%]">
+    <div className="w-screen h-screen bg-gradient-to-br from-cyan-400 to-lime-200">
+      <ListGroup className="w-[80%] h-max">
         {
           theFood && theFood.map((el,id)=>{
             return(
