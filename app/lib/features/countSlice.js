@@ -2,27 +2,30 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     food: [],
-    drink: []
 }
 
 export const countSlice = createSlice({
     name: 'count',
     initialState,
     reducers: {
+        get_all_food: (state, action)=>{
+            state.food = action.payload
+        },
         add_food: (state, action)=>{
             state.food = [...state.food, action.payload]
-        },
-        add_drink: (state, action)=>{
-            state.drink = [...state.drink, action.payload]
         },
         remove_food: (state, action)=>{
             state.food = state.food.filter((el)=>{return el.id !== action.payload})
         },
-        remove_drink: (state, action)=>{
-            state.drink = state.drink.filter((el)=>{return el.id !== action.payload})
+        clear_food: (state, action)=>{
+            state.food = []
         }
     }
 })
 
-export const {add_food, add_drink, remove_food, remove_drink} = countSlice.actions
+export const {get_all_food, add_food, remove_food, clear_food} = countSlice.actions
 export default countSlice.reducer
+
+export const fetchFood =()=> async dispatch => {
+    await axios.get(process.env.NEXT_PUBLIC_URL + '/api/fetchFood').then((resp)=>{dispatch(get_all_food(resp.data))})
+}
