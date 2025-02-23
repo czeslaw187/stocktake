@@ -1,33 +1,19 @@
 'use client'
 
+import { useRouter } from "next/navigation"
 import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { fetchFood } from "./lib/features/countSlice"
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { ListGroup, ListGroupItem } from "reactstrap";
 
-export default function Main_Page() {
+export default function Page() {
 
-  const theFood = useSelector(state=>state.count.food)
-  const dispatch = useDispatch()
+    const router = useRouter()
+    
+    useEffect(()=>{
+        router.push('/Main')
+    },[])
 
-  useEffect(()=>{
-    dispatch(fetchFood())
-  },[])
+    return(
+        <div className="w-screen h-screen bg-gradient-to-br from-cyan-400 to-lime-200">
 
-  
-  console.log(theFood, 'store')
-  return(
-    <div className="w-screen h-screen bg-gradient-to-br from-cyan-400 to-lime-200">
-      <ListGroup className="w-[80%] h-max">
-        {
-          theFood && theFood.map((el,id)=>{
-            return(
-              <ListGroupItem key={id}>{el.name}</ListGroupItem>
-            )
-          })
-        }
-      </ListGroup>
-    </div>
-  )
+        </div>
+    )
 }
