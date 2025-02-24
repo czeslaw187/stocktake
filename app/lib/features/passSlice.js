@@ -43,5 +43,5 @@ export const fetchUsers =()=> async dispatch => {
 }
 
 export const checkSignIn =(obj)=> async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/signIn').then((resp)=>{dispatch(setAdmin(resp.data))})
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/signIn',{obj}).then((resp)=>{dispatch(setLogin(resp.data.isLogged)); dispatch(setAdmin(resp.data.isadmin))})
 }

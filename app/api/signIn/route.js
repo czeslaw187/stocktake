@@ -1,17 +1,18 @@
 import Client from "pg/lib/client"
 
 
-export default async function POST(req) {
-    const {email, password} = await req.json()
+export async function POST(req) {
+    const post = await req.json()
+    const {signemail, signpass} = post.obj
     const client = new Client(process.env.DB_URL)
     await client.connect()
     try {
-        let resp = await client.query('SELECT * FROM counterusers WHERE email=$1',[email])
-        respJson = await resp.json()
-        if (respJson.rows.password === password) {
-            return new Response(JSON.stringify(true))
+        let resp = await client.query('SELECT * FROM counterusers WHERE email=$1',[signemail])
+
+        if (resp.rows[0].password === signpass) {
+            return new Response(JSON.stringify({isLogged: true, isadmin: resp.rows[0].isadmin}))
         } else {
-            return new Response(JSON.stringify(false))
+            return new Response(JSON.stringify({isLogged: false, isadmin: false}))
         }
     } catch (error) {
         return new Response(JSON.stringify(error.message))
