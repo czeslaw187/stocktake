@@ -27,6 +27,6 @@ export const countSlice = createSlice({
 export const {get_all_food, add_food, remove_food, clear_food} = countSlice.actions
 export default countSlice.reducer
 
-export const fetchFood =()=> async dispatch => {
-    await axios.get(process.env.NEXT_PUBLIC_URL + '/api/fetchFood').then((resp)=>{console.log(resp?.data, 'action'); dispatch(get_all_food(resp.data))})
+export const fetchFood =(obj)=> async dispatch => {
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/fetchFood',{obj}).then((resp)=>{console.log(resp?.data, 'action'); dispatch(get_all_food(resp.data))})
 }
