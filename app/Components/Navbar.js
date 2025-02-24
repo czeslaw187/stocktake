@@ -17,7 +17,7 @@ export default function NavBar() {
             <Navbar>
                 <NavbarToggler onClick={toggle}/>
                 <Collapse isOpen={isOpen} navbar>
-                    <Nav navbar>
+                    <Nav className="me-auto" navbar>
                         {
                             labels.map((el,id)=>{
                                 return(

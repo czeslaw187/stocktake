@@ -10,7 +10,7 @@ export default function NavbarItem({el}) {
 
     return(
         <NavItem>
-            <NavLink href={`/${el}`} className={`${daScri.className} text-xl`}>
+            <NavLink href={`/Main/${el}`} className={`${daScri.className} text-xl`}>
                 {el}
             </NavLink>
         </NavItem>
