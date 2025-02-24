@@ -3,6 +3,7 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from 'redux-persist/lib/storage'
 
 import countReducer from './features/countSlice'
+import passReducer from './features/passSlice'
 
 const persistConfig = {
   key: 'persist',
@@ -11,6 +12,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   count: countReducer,
+  pass: passReducer
 })
 
 const makeConfiguredStore = () =>
