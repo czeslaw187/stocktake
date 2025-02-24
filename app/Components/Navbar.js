@@ -10,7 +10,7 @@ import { setLogin } from "../lib/features/passSlice";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { clear_food } from "../lib/features/countSlice";
 
-const labels = ['FOOD', 'BEER', 'SPIRIT']
+const labels = ['Food', 'Beer', 'Spirit', 'Cleaning']
 
 export default function NavBar() {
 
