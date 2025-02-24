@@ -24,7 +24,7 @@ export default function Page() {
         if (user.isLogged) {
             router.push('/Main')
         }
-    },[])
+    },[user])
 
     useEffect(()=>{
         if (post.signemail && post.signpass) {

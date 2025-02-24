@@ -10,13 +10,7 @@ import NavBar from "../Components/Navbar";
 export default function Main_Page() {
 
   const theFood = useSelector(state=>state.count.food)
-  const dispatch = useDispatch()
 
-  useEffect(()=>{
-    dispatch(fetchFood())
-  },[])
-
-  
   console.log(theFood, 'store')
   return(
     <div>
