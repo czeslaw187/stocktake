@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Form, FormGroup, Input, Label } from "reactstrap"
 import { checkSignIn } from "./lib/features/passSlice"
+import { setSignError } from "./lib/features/passSlice"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Page() {
@@ -14,7 +15,7 @@ export default function Page() {
     const dispatch = useDispatch()
     const [newUser,setNewUser] = useState({})
     const [post,setPost] = useState({})
-    const [signError,setSignError] = useState('')
+    // const [signError,setSignError] = useState('')
     const [regError,setRegError] = useState('')
     const validName = new RegExp('[A-Za-z].{2,}')
     const validEmail = new RegExp('^[a-zA-Z0-9._:$!%-]+@[a-zA-z0-9.-]+.[a-zA-z]$')
@@ -41,15 +42,14 @@ export default function Page() {
         setPost(newUser)
 
         if (!newUser.signemail || !validName.test(newUser.signemail)) {
-            setSignError('Type valid email')
+            dispatch(setSignError('Type valid email'))
         } else if (!newUser.signpass || !validPwd.test(newUser.signpass)) {
-            setSignError('Type valid password')
+            dispatch(setSignError('Type valid password'))
         } else {
-            setSignError('Success')
             setNewUser({})
         }
         setTimeout(()=>{
-            setSignError('')
+            dispatch(setSignError(''))
         },1500)
     }
 
@@ -80,7 +80,7 @@ export default function Page() {
             <Form>
                 <FormGroup className="flex flex-col rounder-md shadow-lg shadow-slate-500 p-7 mx-2">
                     <Label className="text-center text-3xl mb-2">Sign In</Label>
-                    <Label className={`text-center ${signError === 'Success' ? 'text-lime-700' : 'text-red-400'}`}>{signError}</Label>
+                    <Label className={`text-center ${user.signerror === 'Success' ? 'text-lime-700' : 'text-red-400'}`}>{user.signerror}</Label>
                     <Label for="signemai">Email</Label>
                     <Input id='signemail' name='signemail' type='email' autoComplete="username" className="h-8 px-1" onChange={(e)=>{handleChange(e)}} value={newUser.signemail || ''}/>
                     <Label for='signpass'>Password</Label> 

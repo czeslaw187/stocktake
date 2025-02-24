@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import SignOut from "./SignOut";
 import { useRouter } from "next/navigation";
 import { setLogin } from "../lib/features/passSlice";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const labels = ['FOOD', 'BEER', 'SPIRIT']
 

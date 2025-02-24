@@ -3,7 +3,8 @@ import axios from "axios";
 
 const initialState = {
     users: [],
-    error: '',
+    signerror: '',
+    regerror: '',
     isAdmin: false,
     isLogged: false
 }
@@ -30,12 +31,18 @@ export const passSlice = createSlice({
         },
         setLogin: (state, action)=> {
             state.isLogged = action.payload
+        },
+        setSignError: (state, action)=> {
+            state.signerror = action.payload
+        },
+        setRegError: (state, action)=> {
+            state.regerror = action.payload
         }
 
     }
 })
 
-export const {getUsers, addUser, removeUser, clearUsers, setAdmin, setLogin } = passSlice.actions
+export const {getUsers, addUser, removeUser, clearUsers, setAdmin, setLogin, setSignError, setRegError } = passSlice.actions
 export default passSlice.reducer
 
 export const fetchUsers =()=> async dispatch => {
@@ -43,5 +50,5 @@ export const fetchUsers =()=> async dispatch => {
 }
 
 export const checkSignIn =(obj)=> async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/signIn',{obj}).then((resp)=>{dispatch(setLogin(resp.data.isLogged)); dispatch(setAdmin(resp.data.isadmin))})
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/signIn',{obj}).then((resp)=>{dispatch(setLogin(resp.data.isLogged)); dispatch(setAdmin(resp.data.isadmin)); dispatch(setSignError(resp.data.message))})
 }

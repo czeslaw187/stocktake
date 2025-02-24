@@ -1,5 +1,10 @@
+import NavBar from "@/app/Components/Navbar";
+
 export default function ItemPage({slug}) {
     return(
-        <div>{slug}</div>
+        <div>
+            <NavBar />
+            {slug}
+        </div>
     )
 }

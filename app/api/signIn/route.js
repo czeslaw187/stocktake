@@ -10,9 +10,9 @@ export async function POST(req) {
         let resp = await client.query('SELECT * FROM counterusers WHERE email=$1',[signemail])
 
         if (resp.rows[0].password === signpass) {
-            return new Response(JSON.stringify({isLogged: true, isadmin: resp.rows[0].isadmin}))
+            return new Response(JSON.stringify({isLogged: true, isadmin: resp.rows[0].isadmin, message: 'Success'}))
         } else {
-            return new Response(JSON.stringify({isLogged: false, isadmin: false}))
+            return new Response(JSON.stringify({isLogged: false, isadmin: false, message: 'Password don\'t match with our records'}))
         }
     } catch (error) {
         return new Response(JSON.stringify(error.message))
