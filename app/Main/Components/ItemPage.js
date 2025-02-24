@@ -1,4 +1,4 @@
-export default function ItemPage() {
+export default function ItemPage({slug}) {
     return(
         <div>{slug}</div>
     )
