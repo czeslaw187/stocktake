@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { Button, Form, FormGroup, Input, Label } from "reactstrap"
+import { Form, FormGroup, Input, Label } from "reactstrap"
 
 export default function Page() {
 
@@ -20,7 +20,7 @@ export default function Page() {
     // useEffect(()=>{
         
     // },[])
-
+    // console.log((new Date(Date.now())).toTimeString(), 'date')
     function handleChange(e) {
         setNewUser({...newUser, [e.target.name]:e.target.value})
     }
@@ -45,7 +45,6 @@ export default function Page() {
     function handleReg(e) {
         e.preventDefault()
         setPost(newUser)
-        console.log(validPwd.test(newUser.regpass, 'input validation'))
         if (!newUser.regname || !validName.test(newUser.regname)) {
             setRegError('Type valid name')
         } else if (!newUser.regemail || !validEmail.test(newUser.regemail)) {
