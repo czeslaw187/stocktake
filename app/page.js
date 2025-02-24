@@ -2,25 +2,28 @@
 
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Form, FormGroup, Input, Label } from "reactstrap"
+import { checkSignIn } from "./lib/features/passSlice"
 
 export default function Page() {
 
     const router = useRouter()
     const user = useSelector(state=>state.pass.users)
+    const dispatch = useDispatch()
     const [newUser,setNewUser] = useState({})
     const [post,setPost] = useState({})
     const [signError,setSignError] = useState('')
     const [regError,setRegError] = useState('')
-    const validName = new RegExp('[A-Za-z].{6,}')
+    const validName = new RegExp('[A-Za-z].{2,}')
     const validEmail = new RegExp('^[a-zA-Z0-9._:$!%-]+@[a-zA-z0-9.-]+.[a-zA-z]$')
     const validPwd = new RegExp('^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[._:$!%-]).{6,}$')
     
-    // useEffect(()=>{
-        
-    // },[])
+    useEffect(()=>{
+        dispatch(checkSignIn(post))
+    },[post])
     // console.log((new Date(Date.now())).toTimeString(), 'date')
+    console.log(user, 'users')
     function handleChange(e) {
         setNewUser({...newUser, [e.target.name]:e.target.value})
     }
@@ -50,7 +53,7 @@ export default function Page() {
         } else if (!newUser.regemail || !validEmail.test(newUser.regemail)) {
             setRegError('Type valid email')
         } else if (!newUser.regpass || !validPwd.test(newUser.regpass)) {
-            setRegError('Password must contain capital letters and special characters')
+            setRegError('A-z0-9._:$!%-')
         } else if (!newUser.regpass2) {
             setRegError('Confirm your password')
         } else if (newUser.regpass !== newUser.regpass2) {
