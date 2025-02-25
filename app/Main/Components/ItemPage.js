@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ListGroup } from "reactstrap";
 import FoodItem from "./FoodItem";
+import CreateItemModal from "./CreateItemModal";
 
 export default function ItemPage({slug}) {
 
@@ -21,16 +22,19 @@ export default function ItemPage({slug}) {
     return(
         <div>
             <NavBar />
-            <div className="w-full text-xl text-center">{slug}</div>
-            <ListGroup>
-                {
-                    cat && cat.map((el,id)=>{
-                        return(
-                            <FoodItem el={el} />
-                        )
-                    })
-                }
-            </ListGroup>
+            <div className="flex flex-col justify-center">
+                <div className="w-full text-xl text-center">{slug}</div>
+                <CreateItemModal slug={slug} />
+                <ListGroup>
+                    {
+                        cat && cat.map((el,id)=>{
+                            return(
+                                <FoodItem key={id} el={el} />
+                            )
+                        })
+                    }
+                </ListGroup>
+            </div>
         </div>
     )
 }
