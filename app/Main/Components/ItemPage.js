@@ -19,7 +19,7 @@ export default function ItemPage({slug}) {
         }
     },[])
 
-    console.log(cat.food,'store')
+    console.log(cat.food,'STORE')
     return(
         <div>
             <NavBar />

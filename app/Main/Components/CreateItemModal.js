@@ -1,6 +1,6 @@
-import { addFoodItem } from "@/app/lib/features/countSlice"
+import { addFoodItem, fetchFood } from "@/app/lib/features/countSlice"
 import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Form, FormGroup, Input, Modal, ModalBody, ModalHeader, Label, ModalFooter, Button } from "reactstrap"
 
 export default function CreateItemModal({slug}) {
@@ -8,6 +8,7 @@ export default function CreateItemModal({slug}) {
     const [modal,setModal] = useState(false)
     const [item,setItem] = useState({})
     const dispatch = useDispatch()
+    const error = useSelector(state=>state.count.error)
 
     function toggle() {
         setModal(!modal)
@@ -24,6 +25,10 @@ export default function CreateItemModal({slug}) {
         toggle()
     }
 
+    useEffect(()=>{
+        dispatch(fetchFood(slug))
+    },[])
+
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
     return(
         <>
@@ -38,14 +43,15 @@ export default function CreateItemModal({slug}) {
                 <ModalBody>
                     <Form>
                         <FormGroup>
+                            <Label className="w-full text-center text-red">{error}</Label>
                             <Label for='name'>Name</Label>
                             <Input name='name' onChange={(e)=>{handleChange(e)}} value={item.name || ''}/>
                             <Label for='unit'>Unit</Label>
                             <Input name='unit' onChange={(e)=>{handleChange(e)}} value={item.unit || ''} />
-                            <Label for='qnt'>Quantity</Label>
-                            <Input name='qnt' type='number' onChange={(e)=>{handleChange(e)}} value={item.qnt || ''} />
-                            <Label for='cat'>Category</Label>
-                            <Input name='cat' onChange={(e)=>{handleChange(e)}} value={item.cat || ''} />
+                            <Label for='qantity'>Quantity</Label>
+                            <Input name='quantity' type='number' onChange={(e)=>{handleChange(e)}} value={item.quantity || ''} />
+                            <Label for='category'>Category</Label>
+                            <Input name='category' onChange={(e)=>{handleChange(e)}} value={item.category || ''} />
                         </FormGroup>
                     </Form>
                 </ModalBody>
