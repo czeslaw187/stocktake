@@ -7,7 +7,6 @@ export default function CreateItemModal({slug}) {
 
     const [modal,setModal] = useState(false)
     const [item,setItem] = useState({})
-    const [post,setPost] = useState({})
     const dispatch = useDispatch()
 
     function toggle() {
@@ -21,14 +20,9 @@ export default function CreateItemModal({slug}) {
 
     function handleAddItem(e) {
         e.preventDefault()
-        setPost(item)
+        dispatch(addFoodItem(item))
+        toggle()
     }
-
-    useEffect(()=>{
-        if (post.name) {
-            dispatch(addFoodItem(post))
-        }
-    },[post])
 
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
     return(

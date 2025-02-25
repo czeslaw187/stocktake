@@ -7,7 +7,7 @@ export async function POST(req) {
     await client.connect()
     try {
         await client.query('INSERT INTO counter (name, unit, quantity, category) VALUES ($1,$2,$3,$4)',[name, unit, qnt, cat])
-        return new Response(JSON.stringify({message: 'New Item added to database'}))
+        return new Response(JSON.stringify(item.obj))
     } catch (error) {
         return new Response(JSON.stringify(error.message))
     } finally {

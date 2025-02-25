@@ -1,11 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Modal, ModalBody, ModalHeader, ModalFooter, Button } from "reactstrap"
+import { useDispatch } from "react-redux"
+import { removeFoodItem } from "@/app/lib/features/countSlice"
 
 export default function TrashButtonModal({id}) {
 
     const [modal,setModal] = useState(false)
+    const dispatch = useDispatch()
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
 
     function toggle() {
@@ -13,7 +16,9 @@ export default function TrashButtonModal({id}) {
     }
 
     function handleDeleteItem(id) {
-        console.log(id, 'print id')
+        console.log(id,'id')
+        dispatch(removeFoodItem({id:id}))
+        toggle()
     }
 
     return(
