@@ -4,9 +4,8 @@ import NavBar from "@/app/Components/Navbar";
 import { fetchFood } from "@/app/lib/features/countSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ListGroup } from "reactstrap";
-import FoodItem from "./FoodItem";
 import CreateItemModal from "./CreateItemModal";
+import RenderedItemComponent from "./RenderedItemComponent";
 
 export default function ItemPage({slug}) {
 
@@ -21,21 +20,19 @@ export default function ItemPage({slug}) {
 
     console.log(cat.food,'STORE')
     return(
-        <div>
+        <div className="w-full">
             <NavBar />
-            <div className="flex flex-col justify-center">
-                <div className="w-full text-xl text-center">{slug}</div>
+            <div>{slug}</div>
                 <CreateItemModal slug={slug} />
-                <ListGroup>
+                <ul className="w-full h-max text-xl text-center flex flex-row flex-wrap">
                     {
                         cat.food && cat.food.map((el,id)=>{
                             return(
-                                <FoodItem key={id} el={el} />
+                                <RenderedItemComponent key={id} el={el} />
                             )
                         })
                     }
-                </ListGroup>
-            </div>
+                </ul>
         </div>
     )
 }
