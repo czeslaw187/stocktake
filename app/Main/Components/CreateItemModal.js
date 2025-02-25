@@ -8,7 +8,8 @@ export default function CreateItemModal({slug}) {
     const [modal,setModal] = useState(false)
     const [item,setItem] = useState({})
     const dispatch = useDispatch()
-    const error = useSelector(state=>state.count.error)
+    const store = useSelector(state=>state.count)
+    const {food, error} = store
 
     function toggle() {
         setModal(!modal)
@@ -27,7 +28,7 @@ export default function CreateItemModal({slug}) {
 
     useEffect(()=>{
         dispatch(fetchFood(slug))
-    },[])
+    },[error])
 
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
     return(
@@ -36,6 +37,7 @@ export default function CreateItemModal({slug}) {
                     onClick={toggle}>
                 Add new {slug}
             </button>
+            <Label className="w-full text-center text-red">{error}</Label>
             <Modal isOpen={modal} toggle={toggle} backdrop={false}>
                 <ModalHeader close={closeBtn}>
                     <div>Describe New {slug}</div>
@@ -43,7 +45,6 @@ export default function CreateItemModal({slug}) {
                 <ModalBody>
                     <Form>
                         <FormGroup>
-                            <Label className="w-full text-center text-red">{error}</Label>
                             <Label for='name'>Name</Label>
                             <Input name='name' onChange={(e)=>{handleChange(e)}} value={item.name || ''}/>
                             <Label for='unit'>Unit</Label>

@@ -1,11 +1,14 @@
 'use client'
 
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { fetchFood } from "../lib/features/countSlice"
+import { useSelector } from "react-redux"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { ListGroup, ListGroupItem } from "reactstrap";
 import NavBar from "../Components/Navbar";
+import { Ultra } from "next/font/google";
+
+const ultra = Ultra({
+  subsets: ['latin'],
+  weight: '400'
+})
 
 export default function Main_Page() {
 
@@ -15,15 +18,23 @@ export default function Main_Page() {
   return(
     <div>
       <NavBar />
-      <ListGroup className="w-[80%] h-max">
+      <ul className={`w-full h-auto flex flex-row flex-wrap mt-3 ${ultra.className}`}>
         {
           theFood && theFood.map((el,id)=>{
             return(
-              <ListGroupItem key={id}>{el.name}</ListGroupItem>
+              <li key={id} className="w-[15rem] h-[15rem] grid justify-items-center place-items-center m-2 shadow-md rounded-md shadow-gray-700 bg-sky-200">
+                <div className="col-span-2 text-center p-1 text-xl">{el.name}</div>
+                <div className="text-center">{el.quantity} {el.unit}</div>
+                <div>
+                  <button className="w-full h-max transition duration-200 ease-out hover:opacity-75">
+                    UPDATE
+                  </button>
+                </div>
+              </li>
             )
           })
         }
-      </ListGroup>
+      </ul>
     </div>
   )
 }
