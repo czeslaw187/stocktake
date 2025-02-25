@@ -28,9 +28,13 @@ export const {get_all_food, add_food, remove_food, clear_food} = countSlice.acti
 export default countSlice.reducer
 
 export const fetchFood =(obj)=> async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/fetchFood',{obj}).then((resp)=>{console.log(resp,'action'); dispatch(get_all_food(resp.data))})
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/fetchFood',{obj}).then((resp)=>{dispatch(get_all_food(resp.data))})
 }
 
 export const addFoodItem =(obj)=> async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addFoodItem',{obj}).then((resp)=>{console.log(resp.data, 'action'); dispatch(add_food(resp.data))})
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addFoodItem',{obj}).then((resp)=>{dispatch(add_food(resp.data))})
+}
+
+export const removeFoodItem =(obj)=> async dispatch => {
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/removeFoodItem',{obj}).then((resp)=>{console.log(resp.data,'action'); dispatch(remove_food(resp.data.id))})
 }
