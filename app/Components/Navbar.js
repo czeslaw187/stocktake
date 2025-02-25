@@ -36,7 +36,7 @@ export default function NavBar() {
                 <NavbarBrand href="/Main">{admin.isadmin ? 'FU' : 'Admin'}</NavbarBrand>
                 <NavbarToggler onClick={toggle}/>
                 <Collapse isOpen={isOpen} navbar>
-                    <Nav className="me-auto" navbar>
+                    <Nav className="ml-auto" navbar>
                         {
                             labels.map((el,id)=>{
                                 return(

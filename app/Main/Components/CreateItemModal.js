@@ -31,7 +31,6 @@ export default function CreateItemModal({slug}) {
     },[post])
 
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
-    console.log(item, 'modal')
     return(
         <>
             <button className="w-[15rem] h-[4rem] rounded-md mx-auto bg-gradient-to-br from-slate-300 to-cyan-300 hover:to-cyan-500 active:shadow-slate-600 active:shadow-inner"

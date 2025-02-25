@@ -10,15 +10,16 @@ import CreateItemModal from "./CreateItemModal";
 
 export default function ItemPage({slug}) {
 
-    const cat = useSelector(state=>state.food)
+    const cat = useSelector(state=>state.count)
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        if (!cat) {
+        if (!cat?.food) {
             dispatch(fetchFood(slug))
         }
     },[])
 
+    console.log(cat.food,'store')
     return(
         <div>
             <NavBar />
@@ -27,7 +28,7 @@ export default function ItemPage({slug}) {
                 <CreateItemModal slug={slug} />
                 <ListGroup>
                     {
-                        cat && cat.map((el,id)=>{
+                        cat.food && cat.food.map((el,id)=>{
                             return(
                                 <FoodItem key={id} el={el} />
                             )
