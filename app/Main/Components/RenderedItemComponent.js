@@ -8,7 +8,7 @@ const concert = Concert_One({
 
 export default function RenderedItemComponent({el}) {
     return(
-            <li key={el.id} className={`w-[15rem] h-[15rem] text-2xl grid justify-items-center place-items-center m-2 shadow-md rounded-md shadow-gray-700 bg-sky-200 ${concert.className}`}>
+            <li key={el.id} className={`w-full md:w-[15rem] h-[15rem] text-2xl grid justify-items-center place-items-center mx-3 my-2 shadow-md rounded-md shadow-gray-700 bg-sky-200 ${concert.className}`}>
                 <div className="col-span-2 text-center p-1">{el.name}</div>
                 <div className="text-center">{el.quantity} {el.unit}</div>
                 <div>

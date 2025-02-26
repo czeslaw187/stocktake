@@ -21,11 +21,9 @@ export default function ItemPage({slug}) {
     useEffect(()=>{
         if (!cat?.food) {
             dispatch(fetchFood(slug))
-            dispatch(set_error(''))
         }
     },[])
 
-    console.log(cat.food,'STORE')
     return(
         <div className="w-full flex flex-col justify-center">
             <NavBar />

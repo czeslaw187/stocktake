@@ -24,9 +24,9 @@ export default function CreateItemModal({slug}) {
         e.preventDefault()
         dispatch(addFoodItem(item))
         toggle()
-        setTimeout(()=>{
+        setTimeout(() => {
             dispatch(set_error(''))
-        },2000)
+        }, 3000);
     }
 
     useEffect(()=>{
@@ -35,8 +35,8 @@ export default function CreateItemModal({slug}) {
 
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
     return(
-        <>
-            <button className="w-[15rem] h-[4rem] rounded-md mx-auto bg-gradient-to-br from-slate-300 to-cyan-300 hover:to-cyan-500 active:shadow-slate-600 active:shadow-inner"
+        <div className="w-full text-center">
+            <button className="w-[15rem] h-[4rem] rounded-md ml-auto bg-gradient-to-br from-slate-300 to-cyan-300 hover:to-cyan-500 active:shadow-slate-600 active:shadow-inner"
                     onClick={toggle}>
                 Add new {slug}
             </button>
@@ -64,6 +64,6 @@ export default function CreateItemModal({slug}) {
                     <Button size="lg" color="danger" onClick={toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
-        </>
+        </div>
     )
 }
