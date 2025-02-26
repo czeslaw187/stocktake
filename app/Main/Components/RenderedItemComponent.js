@@ -13,7 +13,7 @@ export default function RenderedItemComponent({el}) {
                 <div className="col-span-2 text-center p-1">{el.name}</div>
                 <div className="text-center">{el.quantity} {el.unit}</div>
                 <div>
-                    <UpdateFoodModal />
+                    <UpdateFoodModal el={el} />
                 </div>
                 <div className="col-start-2">
                     <TrashButtonModal el={el} />

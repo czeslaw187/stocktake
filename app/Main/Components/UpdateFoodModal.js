@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { Button, Input, Modal, ModalBody, ModalHeader } from "reactstrap"
+import { Button, ButtonGroup, Input, Label, Modal, ModalBody, ModalHeader } from "reactstrap"
 
-export default function UpdateFoodModal() {
+export default function UpdateFoodModal({el}) {
 
     const [modal,setModal] = useState(false)
     const [amount,setAmount] = useState(0)
@@ -12,7 +12,11 @@ export default function UpdateFoodModal() {
     }
 
     function handleChange(e) {
-        setAmount({...amount,[e.taget.name]:e.taget.value})
+        setAmount({...amount,[e.target.name]:e.target.value})
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
     }
 
     return(
@@ -21,14 +25,17 @@ export default function UpdateFoodModal() {
                     onClick={toggle}>
             UPDATE
             </button>
-            <Modal isOpen={modal} toggle={toggle} backdrop={false}>
+            <Modal isOpen={modal} toggle={toggle} backdrop={false} className="">
                 <ModalHeader close={closeBtn}>
                     Update stock amount
                 </ModalHeader>
-                <ModalBody>
-                    <Input name='amount' type="number" onChange={(e)=>{handleChange(e)}} value={amount.amount || ''}/>
-                    <Button color="success" size="lg">Update</Button>
-                    <Button color='danger' size="lg" onClick={toggle}>Cancel</Button>
+                <ModalBody className="grid grid-cols-6 text-2xl md:text-4xl">
+                    <Label className="items-center justify-center flex">{el.quantity}</Label>
+                    <Input name='amount' type="number" className="w-[4rem] h-[3rem]" onChange={(e)=>{handleChange(e)}} value={amount.amount || ''}/>
+                    <ButtonGroup className="col-start-4 col-span-3">
+                        <Button color="success" size="lg" onClick={(e)=>{handleSubmit(e)}}>Update</Button>
+                        <Button color='danger' size="lg" onClick={toggle}>Cancel</Button>
+                    </ButtonGroup>
                 </ModalBody>
             </Modal>
         </div>
