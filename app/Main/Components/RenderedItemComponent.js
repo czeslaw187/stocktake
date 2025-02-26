@@ -1,5 +1,6 @@
 import TrashButtonModal from "./TrashButtonModal";
 import { Concert_One } from "next/font/google";
+import UpdateFoodModal from "./UpdateFoodModal";
 
 const concert = Concert_One({
     subsets: ['latin'],
@@ -12,9 +13,7 @@ export default function RenderedItemComponent({el}) {
                 <div className="col-span-2 text-center p-1">{el.name}</div>
                 <div className="text-center">{el.quantity} {el.unit}</div>
                 <div>
-                    <button className="w-full h-max transition duration-200 ease-out hover:opacity-75">
-                    UPDATE
-                    </button>
+                    <UpdateFoodModal />
                 </div>
                 <div className="col-start-2">
                     <TrashButtonModal el={el} />

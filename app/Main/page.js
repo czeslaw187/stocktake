@@ -19,6 +19,12 @@ export default function Main_Page() {
   const dispatch = useDispatch()
   const theFood = store.food
 
+  useEffect(()=>{
+    setTimeout(() => {
+      dispatch(set_error(''))
+    }, 3000);
+  },[error])
+
   console.log(theFood, 'store')
   return(
     <div>
