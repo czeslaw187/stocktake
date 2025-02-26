@@ -1,11 +1,17 @@
 'use client'
 
 import NavBar from "@/app/Components/Navbar";
-import { fetchFood } from "@/app/lib/features/countSlice";
+import { fetchFood, set_error } from "@/app/lib/features/countSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CreateItemModal from "./CreateItemModal";
 import RenderedItemComponent from "./RenderedItemComponent";
+import { Henny_Penny } from "next/font/google";
+
+const henpen = Henny_Penny({
+    subsets: ['latin'],
+    weight: '400'
+})
 
 export default function ItemPage({slug}) {
 
@@ -15,16 +21,17 @@ export default function ItemPage({slug}) {
     useEffect(()=>{
         if (!cat?.food) {
             dispatch(fetchFood(slug))
+            dispatch(set_error(''))
         }
     },[])
 
     console.log(cat.food,'STORE')
     return(
-        <div className="w-full">
+        <div className="w-full flex flex-col justify-center">
             <NavBar />
-            <div>{slug}</div>
+            <div className={`text-center text-3xl ${henpen.className}`}>{slug}</div>
                 <CreateItemModal slug={slug} />
-                <ul className="w-full h-max text-xl text-center flex flex-row flex-wrap">
+                <ul className="w-full h-max text-center flex flex-row flex-wrap">
                     {
                         cat.food && cat.food.map((el,id)=>{
                             return(

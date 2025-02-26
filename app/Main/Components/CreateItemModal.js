@@ -1,4 +1,4 @@
-import { addFoodItem, fetchFood } from "@/app/lib/features/countSlice"
+import { addFoodItem, fetchFood, set_error } from "@/app/lib/features/countSlice"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Form, FormGroup, Input, Modal, ModalBody, ModalHeader, Label, ModalFooter, Button } from "reactstrap"
@@ -24,6 +24,9 @@ export default function CreateItemModal({slug}) {
         e.preventDefault()
         dispatch(addFoodItem(item))
         toggle()
+        setTimeout(()=>{
+            dispatch(set_error(''))
+        },2000)
     }
 
     useEffect(()=>{

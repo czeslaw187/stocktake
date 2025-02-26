@@ -3,7 +3,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import { Modal, ModalBody, ModalHeader, ModalFooter, Button } from "reactstrap"
 import { useDispatch } from "react-redux"
-import { removeFoodItem } from "@/app/lib/features/countSlice"
+import { removeFoodItem, set_error } from "@/app/lib/features/countSlice"
 
 export default function TrashButtonModal({el}) {
 
@@ -18,6 +18,9 @@ export default function TrashButtonModal({el}) {
     function handleDeleteItem(id) {
         dispatch(removeFoodItem({id:el.id}))
         toggle()
+        setTimeout(()=>{
+            dispatch(set_error(''))
+        },2000)
     }
     return(
         <div>

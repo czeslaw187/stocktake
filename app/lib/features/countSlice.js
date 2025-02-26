@@ -30,7 +30,7 @@ export const fetchFood =(obj)=> async dispatch => {
 }
 
 export const addFoodItem =(obj)=> async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addFoodItem',{obj}).then((resp)=>{console.log(resp.data, 'addfood'); dispatch(set_error(resp.data.message))})
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addFoodItem',{obj}).then((resp)=>{dispatch(set_error(resp.data.message))})
 }
 
 export const removeFoodItem =(obj)=> async dispatch => {
