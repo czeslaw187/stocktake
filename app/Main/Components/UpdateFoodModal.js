@@ -21,6 +21,16 @@ export default function UpdateFoodModal({el}) {
         e.preventDefault()
     }
 
+    function handleIncrement() {
+        setAmount(parseInt(amount)+1)
+    }
+
+    function handleDecrement() {
+        if (amount > 0) {
+            setAmount(parseInt(amount)-1)
+        }
+    }
+
     console.log(amount,'amount')
     return(
         <div>
@@ -36,8 +46,8 @@ export default function UpdateFoodModal({el}) {
                     <Label className="items-center justify-center flex">{el.quantity}</Label>
                     <input name='amount' type="number" className="w-[4rem] h-[3rem] text-2xl md:text-4xl rounded-sm border-l-2 p-1 md:text-center" placeholder="0" onChange={(e)=>{handleChange(e)}} value={amount || ''}/>
                     <ButtonGroup vertical className="align-top">
-                        <Button color="success" size="md" onClick={()=>{setAmount(parseInt(amount)+1)}}>+</Button>
-                        <Button color="danger" size="md" onClick={()=>{setAmount(parseInt(amount)-1)}}>-</Button>
+                        <Button color="success" size="md" onClick={()=>{handleIncrement()}}>+</Button>
+                        <Button color="danger" size="md" onClick={()=>{handleDecrement()}}>-</Button>
                     </ButtonGroup>
                     <ButtonGroup className="col-start-4 col-span-3">
                         <Button color="success" size="lg" onClick={(e)=>{handleSubmit(e)}}>Update</Button>
