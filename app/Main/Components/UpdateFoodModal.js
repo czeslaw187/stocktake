@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { Button, ButtonGroup, Input, Label, Modal, ModalBody, ModalHeader } from "reactstrap"
+import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export default function UpdateFoodModal({el}) {
 
@@ -12,13 +14,14 @@ export default function UpdateFoodModal({el}) {
     }
 
     function handleChange(e) {
-        setAmount({...amount,[e.target.name]:e.target.value})
+        setAmount(e.target.value)
     }
 
     function handleSubmit(e) {
         e.preventDefault()
     }
 
+    console.log(amount,'amount')
     return(
         <div>
             <button className="w-full h-max transition duration-200 ease-out hover:opacity-75"
@@ -29,9 +32,13 @@ export default function UpdateFoodModal({el}) {
                 <ModalHeader close={closeBtn}>
                     Update stock amount
                 </ModalHeader>
-                <ModalBody className="grid grid-cols-6 text-2xl md:text-4xl">
+                <ModalBody className="grid grid-cols-6 text-2xl md:text-4xl place-items-center justify-items-center">
                     <Label className="items-center justify-center flex">{el.quantity}</Label>
-                    <Input name='amount' type="number" className="w-[4rem] h-[3rem]" onChange={(e)=>{handleChange(e)}} value={amount.amount || ''}/>
+                    <input name='amount' type="number" className="w-[4rem] h-[3rem] text-2xl md:text-4xl rounded-sm border-l-2 p-1 md:text-center" placeholder="0" onChange={(e)=>{handleChange(e)}} value={amount || ''}/>
+                    <ButtonGroup vertical className="align-top">
+                        <Button color="success" size="md" onClick={()=>{setAmount(parseInt(amount)+1)}}>+</Button>
+                        <Button color="danger" size="md" onClick={()=>{setAmount(parseInt(amount)-1)}}>-</Button>
+                    </ButtonGroup>
                     <ButtonGroup className="col-start-4 col-span-3">
                         <Button color="success" size="lg" onClick={(e)=>{handleSubmit(e)}}>Update</Button>
                         <Button color='danger' size="lg" onClick={toggle}>Cancel</Button>
@@ -41,3 +48,12 @@ export default function UpdateFoodModal({el}) {
         </div>
     )
 }
+
+{/* <div className="flex flex-col justify-center w-3 mr-auto">
+    <button className="h-4" onClick={()=>{setAmount(parseInt(amount)+1)}}>
+        <FontAwesomeIcon icon={faCaretUp} />
+    </button>
+    <button className="h-4" onClick={()=>{setAmount(parseInt(amount)-1)}}>
+        <FontAwesomeIcon icon={faCaretDown} />
+    </button>
+</div> */}
