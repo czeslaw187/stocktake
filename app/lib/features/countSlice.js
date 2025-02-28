@@ -3,7 +3,8 @@ import axios from "axios";
 
 const initialState = {
     food: [],
-    error: ''
+    error: '',
+    categories: []
 }
 
 export const countSlice = createSlice({
@@ -18,6 +19,9 @@ export const countSlice = createSlice({
         },
         clear_food: (state, action)=>{
             state.food = []
+        },
+        get_categories: (state, action)=> {
+            state.categories = action.payload
         }
     }
 })
@@ -39,4 +43,8 @@ export const removeFoodItem =(obj)=> async dispatch => {
 
 export const updateFoodItem =(obj)=> async dispatch => {
     await axios.post(process.env.NEXT_PUBLIC_URL + '/api/updateFoodItem',{obj}).then((resp)=>{dispatch(set_error(resp.data.message))})
+}
+
+export const fetchCategories =()=> async dispatch => {
+    await axios.get(process.env.NEXT_PUBLIC_URL + '/api/fetchCategories').then((resp)=>{dispatch(get_categories(resp.data.categories))})
 }
