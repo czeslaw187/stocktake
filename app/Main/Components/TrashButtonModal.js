@@ -18,9 +18,6 @@ export default function TrashButtonModal({el}) {
     function handleDeleteItem(id) {
         dispatch(removeFoodItem({id:el.id}))
         toggle()
-        setTimeout(() => {
-            dispatch(set_error(''))
-        }, 3000);
     }
     return(
         <div>

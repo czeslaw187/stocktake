@@ -1,13 +1,15 @@
-import { useState } from "react"
-import { Button, ButtonGroup, Input, Label, Modal, ModalBody, ModalHeader } from "reactstrap"
-import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useState, useEffect } from "react"
+import { Button, ButtonGroup, Label, Modal, ModalBody, ModalHeader } from "reactstrap"
+import { useDispatch, useSelector } from "react-redux"
+import { set_error, updateFoodItem } from "@/app/lib/features/countSlice"
 
 export default function UpdateFoodModal({el}) {
 
     const [modal,setModal] = useState(false)
     const [amount,setAmount] = useState(0)
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
+    const dispatch = useDispatch()
+    const error = useSelector(state=>state.count.error)
 
     function toggle() {
         setModal(!modal)
@@ -17,8 +19,9 @@ export default function UpdateFoodModal({el}) {
         setAmount(e.target.value)
     }
 
-    function handleSubmit(e) {
-        e.preventDefault()
+    function handleSubmit(qnt, id) {
+        dispatch(updateFoodItem({quantity:qnt, id:id}))
+        toggle()
     }
 
     function handleIncrement() {
@@ -30,6 +33,14 @@ export default function UpdateFoodModal({el}) {
             setAmount(parseInt(amount)-1)
         }
     }
+
+    useEffect(() => {
+        return () => {
+            setTimeout(() => {
+                dispatch(set_error(''))
+            }, 3000);
+        };
+    }, [error]);
 
     console.log(amount,'amount')
     return(
@@ -50,7 +61,7 @@ export default function UpdateFoodModal({el}) {
                         <Button color="danger" size="md" onClick={()=>{handleDecrement()}}>-</Button>
                     </ButtonGroup>
                     <ButtonGroup className="col-start-4 col-span-3">
-                        <Button color="success" size="lg" onClick={(e)=>{handleSubmit(e)}}>Update</Button>
+                        <Button color="success" size="lg" onClick={()=>{handleSubmit(amount, el.id)}}>Update</Button>
                         <Button color='danger' size="lg" onClick={toggle}>Cancel</Button>
                     </ButtonGroup>
                 </ModalBody>
@@ -58,12 +69,3 @@ export default function UpdateFoodModal({el}) {
         </div>
     )
 }
-
-{/* <div className="flex flex-col justify-center w-3 mr-auto">
-    <button className="h-4" onClick={()=>{setAmount(parseInt(amount)+1)}}>
-        <FontAwesomeIcon icon={faCaretUp} />
-    </button>
-    <button className="h-4" onClick={()=>{setAmount(parseInt(amount)-1)}}>
-        <FontAwesomeIcon icon={faCaretDown} />
-    </button>
-</div> */}
