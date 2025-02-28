@@ -7,7 +7,7 @@ export async function POST(req) {
     const client = new Client(process.env.DB_URL)
     await client.connect()
     try {
-        await client.query('UPDATE counter SET quantity=$1 WHERE id=$2',[quantity, id])//  <<<-------------- CONTINUE
+        await client.query('UPDATE counter SET quantity=$1 WHERE id=$2',[quantity, id])
         return new Response(JSON.stringify({message: 'Item updated'}))
     } catch (error) {
         return new Response(JSON.stringify({message:error.message}))

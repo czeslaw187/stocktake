@@ -1,6 +1,6 @@
 'use client'
 
-import { Navbar, Collapse, NavbarToggler, Nav, NavbarBrand } from "reactstrap";
+import { Navbar, Collapse, NavbarToggler, Nav, NavbarBrand, NavItem, NavLink } from "reactstrap";
 import NavbarItem from "./NavbarItem";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,12 @@ import { useRouter } from "next/navigation";
 import { setLogin } from "../lib/features/passSlice";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { clear_food } from "../lib/features/countSlice";
+import { Bangers } from "next/font/google";
+
+const bangers = Bangers({
+    subsets: ['latin'],
+    weight: '400',
+})
 
 const labels = ['Food', 'Beer', 'Spirit', 'Chemical']
 
@@ -37,6 +43,11 @@ export default function NavBar() {
                 <NavbarToggler onClick={toggle}/>
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar>
+                        <NavItem>
+                            <NavLink href={'/AddCategory'} className={`${bangers.className} text-right mr-2`}>
+                                <div className="text-xl">Add Category</div>
+                            </NavLink>
+                        </NavItem>
                         {
                             labels.map((el,id)=>{
                                 return(
