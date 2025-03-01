@@ -26,7 +26,7 @@ export const countSlice = createSlice({
     }
 })
 
-export const {get_all_food, set_error, clear_food} = countSlice.actions
+export const {get_all_food, set_error, clear_food, get_categories} = countSlice.actions
 export default countSlice.reducer
 
 export const fetchFood =(obj)=> async dispatch => {
@@ -46,5 +46,5 @@ export const updateFoodItem =(obj)=> async dispatch => {
 }
 
 export const fetchCategories =()=> async dispatch => {
-    await axios.get(process.env.NEXT_PUBLIC_URL + '/api/fetchCategories').then((resp)=>{dispatch(get_categories(resp.data.categories))})
+    await axios.get(process.env.NEXT_PUBLIC_URL + '/api/fetchCategories').then((resp)=>{dispatch(get_categories(resp.data))})
 }

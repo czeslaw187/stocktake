@@ -1,6 +1,20 @@
+'use client'
+
+import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../Components/Navbar";
+import { fetchCategories } from "../lib/features/countSlice";
+import { useEffect } from "react";
 
 export default function AddCategoryPage() {
+
+    const categories = useSelector(state=>state.count.categories)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchCategories())
+    }, []);
+    console.log(categories)
+
     return(
         <div>
             <NavBar />
