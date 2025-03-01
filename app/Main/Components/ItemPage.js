@@ -27,7 +27,7 @@ export default function ItemPage({slug}) {
     return(
         <div className="w-full flex flex-col justify-center">
             <NavBar />
-            <div className={`text-center text-3xl ${henpen.className}`}>{slug}</div>
+            <div className={`text-center text-3xl my-2 ${henpen.className}`}>{slug}</div>
                 <CreateItemModal slug={slug} />
                 <ul className="w-full h-max text-center flex flex-row flex-wrap">
                     {

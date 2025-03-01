@@ -53,7 +53,7 @@ export default function NavBar() {
                             </NavLink>
                         </NavItem>
                         {
-                            labels.map((el,id)=>{
+                            categories && categories.map((el,id)=>{
                                 return(
                                     <NavbarItem key={id} el={el} />
                                 )
