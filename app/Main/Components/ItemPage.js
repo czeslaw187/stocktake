@@ -1,7 +1,7 @@
 'use client'
 
 import NavBar from "@/app/Components/Navbar";
-import { fetchFood, set_error } from "@/app/lib/features/countSlice";
+import { fetchFood } from "@/app/lib/features/countSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CreateItemModal from "./CreateItemModal";

@@ -6,6 +6,8 @@ import CategoryItem from "./Components/CategoryItem";
 import { Henny_Penny } from "next/font/google";
 import CreateCategoryModal from "./Components/CreateCategoryModal";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useEffect } from "react";
+import { fetchCategories, set_error } from "../lib/features/countSlice";
 
 
 const henPen = Henny_Penny({
@@ -15,9 +17,23 @@ const henPen = Henny_Penny({
 
 export default function AddCategoryPage() {
 
-    const categories = useSelector(state=>state.count.categories)
+    const count = useSelector(state=>state.count)
+    const categories = count.categories
+    const error = count.error
     const dispatch = useDispatch()
 
+    useEffect(()=>{
+        setTimeout(() => {
+            dispatch(set_error(''))
+        }, 3000);
+        dispatch(fetchCategories())
+    },[error])
+
+    useEffect(()=>{
+        if (categories) {
+            dispatch(fetchCategories())
+        }
+    },[])
     console.log(categories)
 
     return(
@@ -26,6 +42,7 @@ export default function AddCategoryPage() {
             <div className="w-[90%] md:w-[60%] mx-auto mt-10 rounded">
             <div className={`text-center text-3xl my-2 ${henPen.className}`}>Categories</div>
             <CreateCategoryModal />
+            <div className={`w-full text-center ${error === 'Success' ? 'text-green-600' : 'text-red-600'}`}>{error}</div>
                 <ul>
                     {
                         categories && categories.map((el,id)=>{

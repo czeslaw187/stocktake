@@ -48,3 +48,11 @@ export const updateFoodItem =(obj)=> async dispatch => {
 export const fetchCategories =()=> async dispatch => {
     await axios.get(process.env.NEXT_PUBLIC_URL + '/api/fetchCategories').then((resp)=>{dispatch(get_categories(resp.data))})
 }
+
+export const addCategory =(obj)=> async dispatch => {
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addCategory',{obj}).then((resp)=>{dispatch(set_error(resp.data.message))})
+}
+
+export const deleteCategory =(obj)=> async dispatch => {
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/deleteCategory',{obj}).then((resp)=>{dispatch(set_error(resp.data.message))})
+}

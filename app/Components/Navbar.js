@@ -8,7 +8,7 @@ import SignOut from "./SignOut";
 import { useRouter } from "next/navigation";
 import { setLogin } from "../lib/features/passSlice";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { clear_food, fetchCategories } from "../lib/features/countSlice";
+import { clear_food } from "../lib/features/countSlice";
 import { Bangers } from "next/font/google";
 
 const bangers = Bangers({
@@ -30,9 +30,6 @@ export default function NavBar() {
         if (!admin.isLogged) {
             dispatch(clear_food())
             router.push('/')
-        }
-        if (categories) {
-            dispatch(fetchCategories())
         }
     },[admin])
 

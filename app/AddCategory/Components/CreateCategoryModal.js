@@ -1,12 +1,15 @@
 import { useState } from "react"
 import { Button, Input, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useDispatch } from "react-redux";
+import { addCategory } from "@/app/lib/features/countSlice";
 
 
 export default function CreateCategoryModal() {
 
     const [modal,setModal] = useState(false)
     const [name,setName] = useState('')
+    const dispatch = useDispatch()
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
 
     function toggle() {
@@ -16,6 +19,12 @@ export default function CreateCategoryModal() {
     function handleChange(e) {
         setName({...name,[e.target.name]:e.target.value})
     }
+
+    function handleSubmit() {
+        dispatch(addCategory({category: name}))
+        toggle()
+    }
+
     console.log(name)
     return(
         <div className="w-full text-center my-3">
@@ -31,7 +40,7 @@ export default function CreateCategoryModal() {
                     <Input name='category' placeholder="new category..." onChange={(e)=>{handleChange(e)}} value={name.category || ''} />
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="success" size="lg" className="w-[10rem]">Add</Button>
+                    <Button color="success" size="lg" className="w-[10rem]" onClick={()=>{handleSubmit()}}>Add</Button>
                     <Button color="danger" size="lg" className="w-[10rem]" onClick={toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
