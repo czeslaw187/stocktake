@@ -5,9 +5,9 @@ import NavBar from "../Components/Navbar";
 import CategoryItem from "./Components/CategoryItem";
 import { Henny_Penny } from "next/font/google";
 import CreateCategoryModal from "./Components/CreateCategoryModal";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from "react";
-import { fetchCategories, set_error } from "../lib/features/countSlice";
+import { fetchAllFood, fetchCategories, set_error } from "../lib/features/countSlice";
 
 
 const henPen = Henny_Penny({
@@ -26,7 +26,10 @@ export default function AddCategoryPage() {
         setTimeout(() => {
             dispatch(set_error(''))
         }, 3000);
-        dispatch(fetchCategories())
+        if (count?.food.length <= 0) {
+            dispatch(fetchCategories())
+            dispatch(fetchAllFood())
+        }
     },[error])
 
     useEffect(()=>{
