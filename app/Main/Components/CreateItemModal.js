@@ -17,7 +17,7 @@ export default function CreateItemModal({slug}) {
     }
 
     function handleChange(e) {
-        setItem({...item,[e.target.name]:e.target.value})
+        setItem({...item,[e.target.name]:e.target.value,category: slug})
     }
 
     function handleAddItem(e) {
@@ -32,7 +32,7 @@ export default function CreateItemModal({slug}) {
     useEffect(()=>{
         dispatch(fetchFood(slug))
     },[error])
-
+    console.log(item)
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
     return(
         <div className="w-full text-center">
@@ -49,13 +49,13 @@ export default function CreateItemModal({slug}) {
                     <Form>
                         <FormGroup>
                             <Label for='name'>Name</Label>
-                            <Input name='name' onChange={(e)=>{handleChange(e)}} value={item.name || ''}/>
+                            <Input name='name' onChange={(e)=>{handleChange(e)}} value={item.name || ''} required/>
                             <Label for='unit'>Unit</Label>
-                            <Input name='unit' onChange={(e)=>{handleChange(e)}} value={item.unit || ''} />
+                            <Input name='unit' onChange={(e)=>{handleChange(e)}} value={item.unit || ''} required/>
                             <Label for='qantity'>Quantity</Label>
-                            <Input name='quantity' type='number' onChange={(e)=>{handleChange(e)}} value={item.quantity || ''} />
+                            <Input name='quantity' type='number' onChange={(e)=>{handleChange(e)}} value={item.quantity || ''} required/>
                             <Label for='category'>Category</Label>
-                            <Input name='category' onChange={(e)=>{handleChange(e)}} value={item.category || ''} />
+                            <Input name='category' value={slug} disabled required/>
                         </FormGroup>
                     </Form>
                 </ModalBody>
