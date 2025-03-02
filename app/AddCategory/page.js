@@ -34,7 +34,6 @@ export default function AddCategoryPage() {
             dispatch(fetchCategories())
         }
     },[])
-    console.log(categories)
 
     return(
         <div>
@@ -42,7 +41,7 @@ export default function AddCategoryPage() {
             <div className="w-[90%] md:w-[60%] mx-auto mt-10 rounded">
             <div className={`text-center text-3xl my-2 ${henPen.className}`}>Categories</div>
             <CreateCategoryModal />
-            <div className={`w-full text-center ${error === 'Success' ? 'text-green-600' : 'text-red-600'}`}>{error}</div>
+            <div className={`w-full text-center font-bold}`}>{error}</div>
                 <ul>
                     {
                         categories && categories.map((el,id)=>{

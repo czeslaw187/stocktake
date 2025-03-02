@@ -1,11 +1,11 @@
-import { deleteCategory } from "@/app/lib/features/countSlice"
+import { deleteCategory, set_error } from "@/app/lib/features/countSlice"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap"
 
-export default function TrashCategoryModal({el}) {
+export default function TrashCategoryModal({el, filtered}) {
 
     const [modal,setModal] = useState(false)
     const dispatch = useDispatch()
@@ -16,7 +16,12 @@ export default function TrashCategoryModal({el}) {
     }
 
     function handleSubmit() {
-        dispatch(deleteCategory(el.id))
+        if (filtered.length <= 0) {
+            dispatch(deleteCategory(el.id))
+        } else {
+            dispatch(set_error('Remove all active elements from category'))
+        }
+        toggle()
     }
 
     return(
