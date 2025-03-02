@@ -15,15 +15,16 @@ const henpen = Henny_Penny({
 
 export default function ItemPage({slug}) {
 
-    const cat = useSelector(state=>state.count)
+    const category = useSelector(state=>state.count)
+    const cat = category.food.filter((el)=>{return el.category === slug})
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        if (!cat?.food) {
+        if (!cat) {
             dispatch(fetchFood(slug))
         }
     },[])
-
+    console.log(cat, slug)
     return(
         <div className="w-full flex flex-col justify-center">
             <NavBar />

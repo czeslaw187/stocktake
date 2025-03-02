@@ -26,7 +26,7 @@ export default function AddCategoryPage() {
         setTimeout(() => {
             dispatch(set_error(''))
         }, 3000);
-        if (count?.food.length <= 0) {
+        if (count?.food) {
             dispatch(fetchCategories())
             dispatch(fetchAllFood())
         }
