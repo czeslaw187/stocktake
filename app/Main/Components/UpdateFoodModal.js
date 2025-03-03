@@ -59,15 +59,15 @@ export default function UpdateFoodModal({el}) {
                 <ModalBody className="grid grid-cols-6 text-xl md:text-2xl place-items-center justify-items-center">
                     <div className="flex items-baseline col-span-2">
                         <Label className="items-center justify-center flex mx-2 md:mx-4">{el.quantity}</Label>
-                        <input name='amount' type="number" className="w-[6rem] h-[4rem] text-xl md:text-2xl rounded-sm border-l-2 p-1 md:text-center" onChange={(e)=>{handleChange(e)}} value={amount || ''}/>
+                        <input name='amount' type="number" className="w-[4rem] md:w-[6rem] h-[4rem] text-xl md:text-2xl rounded-sm border-l-2 p-1 md:text-center" onChange={(e)=>{handleChange(e)}} value={amount || ''}/>
                     </div>
-                    <ButtonGroup vertical className="align-top col-start-3">
+                    <ButtonGroup vertical className="salign-top col-start-3">
                         <Button color="success" size="md" onClick={()=>{handleIncrement()}}>+</Button>
                         <Button color="danger" size="md" onClick={()=>{handleDecrement()}}>-</Button>
                     </ButtonGroup>
-                    <ButtonGroup className="col-start-4 col-span-3">
-                        <Button color="success" size="lg" onClick={()=>{handleSubmit(amount, el.id)}}>Update</Button>
-                        <Button color='danger' size="lg" onClick={toggle}>Cancel</Button>
+                    <ButtonGroup className="col-start-4 col-span-3 h-full">
+                        <Button color="success" size="md" onClick={()=>{handleSubmit(amount, el.id)}}>Update</Button>
+                        <Button color='danger' size="md" onClick={toggle}>Cancel</Button>
                     </ButtonGroup>
                 </ModalBody>
             </Modal>
