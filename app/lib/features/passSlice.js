@@ -51,9 +51,9 @@ export const checkSignIn =(obj)=> async dispatch => {
 }
 
 export const removeUser =(obj)=> async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/removeUser').then((resp)=>{dispatch(setRegError(resp.data.message))})
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/removeUser',{obj}).then((resp)=>{dispatch(setRegError(resp.data.message))})
 }
 
 export const addUser =(obj)=> async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addUser').then((resp)=>{dispatch(setRegError(resp.data.message))})
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addUser',{obj}).then((resp)=>{dispatch(setRegError(resp.data.message))})
 }

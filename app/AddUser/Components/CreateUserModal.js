@@ -10,6 +10,7 @@ export default function CreateUserModal() {
     const error = useSelector(state=>state.pass.regerror)
     const [modal,setModal] = useState(false)
     const [creds,setCreds] = useState({})
+    const [state,setState] = useState(false)
     const dispatch = useDispatch()
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
 
@@ -18,7 +19,7 @@ export default function CreateUserModal() {
     }
 
     function handleChange(e) {
-        setCreds({...creds,[e.target.name]:e.target.value})
+        setCreds({...creds,[e.target.name]:e.target.value, isadmin:state})
     }
 
     function handleSubmit() {
@@ -27,10 +28,11 @@ export default function CreateUserModal() {
         } else if (creds.password !== creds.password2) {
             dispatch(setRegError('Password don\'t match'))
         } else {
+            dispatch(addUser(creds))
             toggle()
         }
     }
-
+    console.log(creds, 'creds')
     return(
         <div className="w-full text-center my-3">
             <button className="w-[15rem] h-[4rem] rounded-md ml-auto bg-gradient-to-br from-slate-300 to-cyan-300 hover:to-cyan-500 active:shadow-slate-600 active:shadow-inner"
@@ -54,7 +56,7 @@ export default function CreateUserModal() {
                             <Input name="password2" type="password" onChange={(e)=>{handleChange(e)}} value={creds.password2 || ''} required/>
                             <FormGroup switch>
                                 <Label for="isadmin">Admin</Label>
-                                <Input name="isadmin" type="switch" role="switch" onChange={(e)=>{handleChange(e)}} value={creds.isadmin || ''} required/>
+                                <Input name="isadmin" type="switch" role="switch" checked={state} onChange={()=>{setState(!state); setCreds({...creds,isadmin:state})}}/>
                             </FormGroup>
                         </FormGroup>
                     </Form>

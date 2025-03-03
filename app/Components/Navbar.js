@@ -34,7 +34,6 @@ export default function NavBar() {
     function toggle() {
         setIsOpen(!isOpen)
     }
-    console.log(admin)
     return(
         <div className="bg-gradient-to-bl from-amber-300 to-indigo-400">
             <Navbar>

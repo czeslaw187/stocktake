@@ -24,6 +24,7 @@ export default function AddUser() {
     },[])
 
     useEffect(()=>{
+        dispatch(fetchAllUsers())
         setTimeout(() => {
             dispatch(setRegError(''))
         }, 3000);
