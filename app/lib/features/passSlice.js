@@ -35,13 +35,25 @@ export const passSlice = createSlice({
     }
 })
 
-export const {getUsers, addUser, removeUser, clearUsers, setAdmin, setLogin, setSignError, setRegError } = passSlice.actions
+export const {getUsers, clearUsers, setAdmin, setLogin, setSignError, setRegError } = passSlice.actions
 export default passSlice.reducer
 
+export const fetchAllUsers =()=> async dispatch => {
+    await axios.get(process.env.NEXT_PUBLIC_URL + '/api/fetchAllUsers').then((resp)=>{dispatch(getUsers(resp.data))})
+}
+
 export const fetchUsers =(obj)=> async dispatch => {
-    await axios.get(process.env.NEXT_PUBLIC_URL + '/api/fetchUsers',{obj}).then((resp)=>{dispatch(getUsers(resp.data))})
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/fetchUsers',{obj}).then((resp)=>{dispatch(getUsers(resp.data))})
 }
 
 export const checkSignIn =(obj)=> async dispatch => {
     await axios.post(process.env.NEXT_PUBLIC_URL + '/api/signIn',{obj}).then((resp)=>{dispatch(getUsers(resp.data.users)); dispatch(setLogin(resp.data.isLogged)); dispatch(setAdmin(resp.data.isadmin)); dispatch(setSignError(resp.data.message))})
+}
+
+export const removeUser =(obj)=> async dispatch => {
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/removeUser').then((resp)=>{dispatch(setRegError(resp.data.message))})
+}
+
+export const addUser =(obj)=> async dispatch => {
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addUser').then((resp)=>{dispatch(setRegError(resp.data.message))})
 }
