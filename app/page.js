@@ -51,7 +51,6 @@ export default function Page() {
 
     function handleReg(e) {
         e.preventDefault()
-        setPost(newUser)
         if (!newUser.regname || !validName.test(newUser.regname)) {
             dispatch(setRegError('Type valid name'))
         } else if (!newUser.regemail || !validEmail.test(newUser.regemail)) {

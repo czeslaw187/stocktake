@@ -9,6 +9,7 @@ export default function CreateItemModal({slug}) {
     const [item,setItem] = useState({})
     const dispatch = useDispatch()
     const store = useSelector(state=>state.count)
+    const user = useSelector(state=>state.pass)
     const {food, error} = store
 
     function toggle() {
@@ -29,9 +30,6 @@ export default function CreateItemModal({slug}) {
         }, 3000);
     }
 
-    // useEffect(()=>{
-    //     dispatch(fetchAllFood())
-    // },[error])
     console.log(item)
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
     return(

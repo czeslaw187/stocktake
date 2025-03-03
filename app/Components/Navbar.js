@@ -16,8 +16,6 @@ const bangers = Bangers({
     weight: '400',
 })
 
-const labels = ['Food', 'Beer', 'Spirit', 'Chemical']
-
 export default function NavBar() {
 
     const [isOpen, setIsOpen] = useState(false)
@@ -40,11 +38,11 @@ export default function NavBar() {
     return(
         <div className="bg-gradient-to-bl from-amber-300 to-indigo-400">
             <Navbar>
-                <NavbarBrand href="/Main">{admin.isadmin ? 'ADMIN' : admin.name}</NavbarBrand>
+                <NavbarBrand href="/Main">{admin.isAdmin ? 'ADMIN' : admin.users[0].name}</NavbarBrand>
                 <NavbarToggler onClick={toggle}/>
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar>
-                        <NavItem>
+                        <NavItem hidden={admin.isAdmin ? false : true}>
                             <NavLink href={'/AddCategory'} className={`${bangers.className} text-right mr-2`}>
                                 <div className="text-xl">Add Category</div>
                             </NavLink>

@@ -6,8 +6,10 @@ import { updateFoodItem } from "@/app/lib/features/countSlice"
 export default function UpdateFoodModal({el}) {
 
     const count = useSelector(state=>state.count)
+    const user = useSelector(state=>state.pass)
     const [modal,setModal] = useState(false)
     const [amount,setAmount] = useState(el.quantity)
+    const [error,setError] = useState('')
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
     const dispatch = useDispatch()
     
@@ -21,8 +23,16 @@ export default function UpdateFoodModal({el}) {
     }
 
     function handleSubmit(qnt, id) {
-        dispatch(updateFoodItem({quantity:qnt, id:id}))
-        toggle()
+        if (!user.isAdmin && amount > el.quantity) {
+            setError('Need Admin privilage to add')
+            setTimeout(() => {
+                setError('')
+            }, 3000);
+        } else {
+            dispatch(updateFoodItem({quantity:qnt, id:id}))
+            toggle()
+        }
+        
     }
 
     function handleIncrement() {
@@ -35,7 +45,7 @@ export default function UpdateFoodModal({el}) {
         }
     }
 
-    console.log(amount,'amount')
+    console.log(user,'amount')
     return(
         <div>
             <button className="w-full h-max transition duration-200 ease-out hover:opacity-75"
@@ -44,14 +54,14 @@ export default function UpdateFoodModal({el}) {
             </button>
             <Modal isOpen={modal} toggle={toggle} backdrop={false} className="">
                 <ModalHeader close={closeBtn}>
-                    Update stock amount
+                    {error ? error : 'Update stock amount'} 
                 </ModalHeader>
                 <ModalBody className="grid grid-cols-6 text-xl md:text-2xl place-items-center justify-items-center">
-                    <div className="flex items-baseline">
+                    <div className="flex items-baseline col-span-2">
                         <Label className="items-center justify-center flex mx-2 md:mx-4">{el.quantity}</Label>
-                        <input name='amount' type="number" className="w-[4rem] h-[4rem] text-xl md:text-2xl rounded-sm border-l-2 p-1 md:text-center" placeholder="0" onChange={(e)=>{handleChange(e)}} value={amount || ''}/>
+                        <input name='amount' type="number" className="w-[6rem] h-[4rem] text-xl md:text-2xl rounded-sm border-l-2 p-1 md:text-center" onChange={(e)=>{handleChange(e)}} value={amount || ''}/>
                     </div>
-                    <ButtonGroup vertical className="align-top">
+                    <ButtonGroup vertical className="align-top col-start-3">
                         <Button color="success" size="md" onClick={()=>{handleIncrement()}}>+</Button>
                         <Button color="danger" size="md" onClick={()=>{handleDecrement()}}>-</Button>
                     </ButtonGroup>

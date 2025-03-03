@@ -1,6 +1,7 @@
 import TrashButtonModal from "./TrashButtonModal";
 import { Concert_One } from "next/font/google";
 import UpdateFoodModal from "./UpdateFoodModal";
+import { useSelector } from "react-redux";
 
 const concert = Concert_One({
     subsets: ['latin'],
@@ -8,6 +9,9 @@ const concert = Concert_One({
 })
 
 export default function RenderedItemComponent({el}) {
+
+    const user = useSelector(state=>state.pass)
+
     return(
             <li key={el.id} className={`w-full md:w-[15rem] h-[15rem] text-2xl grid justify-items-center place-items-center mx-3 my-2 shadow-md rounded-md shadow-gray-700 bg-sky-200 ${concert.className}`}>
                 <div className="col-span-2 text-center p-1">{el.name}</div>
@@ -17,7 +21,7 @@ export default function RenderedItemComponent({el}) {
                     <UpdateFoodModal el={el} />
                 </div>
                 <div>
-                    <TrashButtonModal el={el} />
+                    {user.isAdmin ? <TrashButtonModal el={el} /> : null}
                 </div>
             </li>
     )

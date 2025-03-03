@@ -16,13 +16,6 @@ export const passSlice = createSlice({
         getUsers: (state, action)=> {
             state.users = action.payload
         },
-        addUser: (state, action)=> {
-            state.users = [...state.users, action.payload]
-        },
-        removeUser: (state, action) => {
-            let sieved = [...state.users]
-            state.users = sieved.filter((el)=>{return el.id != action.payload})
-        },
         clearUsers: (state)=> {
             state.users = []
         },

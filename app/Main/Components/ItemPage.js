@@ -18,6 +18,7 @@ export default function ItemPage({slug}) {
     const cat = useSelector(state=>state.count)
     const dispatch = useDispatch()
     const filtered = cat.food.filter((it)=>{return it.category === slug})
+    const user = useSelector(state=>state.pass)
 
     useEffect(()=>{
         dispatch(fetchAllFood())
@@ -30,7 +31,7 @@ export default function ItemPage({slug}) {
         <div className="w-full flex flex-col justify-center">
             <NavBar />
             <div className={`text-center text-3xl my-2 ${henpen.className}`}>{slug}</div>
-                <CreateItemModal slug={slug} />
+                {user.isAdmin ? <CreateItemModal slug={slug} /> : null}
                 <ul className="w-full h-max text-center flex flex-row flex-wrap">
                     {
                         filtered && filtered.map((el,id)=>{
