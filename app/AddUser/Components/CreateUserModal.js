@@ -10,7 +10,6 @@ export default function CreateUserModal() {
     const error = useSelector(state=>state.pass.regerror)
     const [modal,setModal] = useState(false)
     const [creds,setCreds] = useState({})
-    const [state,setState] = useState(false)
     const dispatch = useDispatch()
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
 
@@ -19,7 +18,7 @@ export default function CreateUserModal() {
     }
 
     function handleChange(e) {
-        setCreds({...creds,[e.target.name]:e.target.value, isadmin:state})
+        setCreds({...creds,[e.target.name]:e.target.value, isadmin: false})
     }
 
     function handleSubmit() {
@@ -54,10 +53,6 @@ export default function CreateUserModal() {
                             <Input name="password" type="password" onChange={(e)=>{handleChange(e)}} value={creds.password || ''} required/>
                             <Label for="password2">Repeat Password</Label>
                             <Input name="password2" type="password" onChange={(e)=>{handleChange(e)}} value={creds.password2 || ''} required/>
-                            <FormGroup switch>
-                                <Label for="isadmin">Admin</Label>
-                                <Input name="isadmin" type="switch" role="switch" checked={state} onChange={()=>{setState(!state); setCreds({...creds,isadmin:state})}}/>
-                            </FormGroup>
                         </FormGroup>
                     </Form>
                 </ModalBody>

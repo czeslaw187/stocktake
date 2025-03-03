@@ -41,7 +41,7 @@ export default function Page() {
 
         if (!newUser.signemail || !validName.test(newUser.signemail)) {
             dispatch(setSignError('Type valid email'))
-        } else if (!newUser.signpass || !validPwd.test(newUser.signpass)) {
+        } else if (!newUser.signpass) {
             dispatch(setSignError('Type valid password'))
         } else {
             dispatch(checkSignIn(newUser))
