@@ -6,7 +6,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap"
 
-export default function TrashUserModal() {
+export default function TrashUserModal({el}) {
 
     const [modal,setModal] = useState(false)
     const dispatch = useDispatch()
