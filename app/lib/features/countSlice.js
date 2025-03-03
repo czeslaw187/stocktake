@@ -34,10 +34,6 @@ export const fetchAllFood =()=> async dispatch => {
     await axios.get(process.env.NEXT_PUBLIC_URL + '/api/fetchAllFood').then((resp)=>{dispatch(get_all_food(resp.data))})
 }
 
-export const fetchFood =(obj)=> async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/fetchFood',{obj}).then((resp)=>{dispatch(get_all_food(resp.data))})
-}
-
 export const addFoodItem =(obj)=> async dispatch => {
     await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addFoodItem',{obj}).then((resp)=>{dispatch(set_error(resp.data.message))})
 }

@@ -1,4 +1,4 @@
-import { addFoodItem, fetchFood, set_error } from "@/app/lib/features/countSlice"
+import { addFoodItem, fetchAllFood, fetchFood, set_error } from "@/app/lib/features/countSlice"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Form, FormGroup, Input, Modal, ModalBody, ModalHeader, Label, ModalFooter, Button } from "reactstrap"
@@ -29,9 +29,9 @@ export default function CreateItemModal({slug}) {
         }, 3000);
     }
 
-    useEffect(()=>{
-        dispatch(fetchFood(slug))
-    },[error])
+    // useEffect(()=>{
+    //     dispatch(fetchAllFood())
+    // },[error])
     console.log(item)
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
     return(

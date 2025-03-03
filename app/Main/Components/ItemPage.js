@@ -1,7 +1,7 @@
 'use client'
 
 import NavBar from "@/app/Components/Navbar";
-import { fetchFood } from "@/app/lib/features/countSlice";
+import { fetchAllFood, fetchFood, set_error } from "@/app/lib/features/countSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CreateItemModal from "./CreateItemModal";
@@ -15,16 +15,17 @@ const henpen = Henny_Penny({
 
 export default function ItemPage({slug}) {
 
-    const category = useSelector(state=>state.count)
-    const cat = category.food.filter((el)=>{return el.category === slug})
+    const cat = useSelector(state=>state.count)
     const dispatch = useDispatch()
+    const filtered = cat.food.filter((it)=>{return it.category === slug})
 
     useEffect(()=>{
-        if (!cat) {
-            dispatch(fetchFood(slug))
-        }
-    },[])
-    console.log(cat, slug)
+        dispatch(fetchAllFood())
+        setTimeout(() => {
+            dispatch(set_error(''))
+        }, 3000);
+    },[cat.error])
+
     return(
         <div className="w-full flex flex-col justify-center">
             <NavBar />
@@ -32,7 +33,7 @@ export default function ItemPage({slug}) {
                 <CreateItemModal slug={slug} />
                 <ul className="w-full h-max text-center flex flex-row flex-wrap">
                     {
-                        cat.food && cat.food.map((el,id)=>{
+                        filtered && filtered.map((el,id)=>{
                             return(
                                 <RenderedItemComponent key={id} el={el} />
                             )
