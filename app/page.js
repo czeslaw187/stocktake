@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Form, FormGroup, Input, Label } from "reactstrap"
 import { checkSignIn } from "./lib/features/passSlice"
-import { setSignError } from "./lib/features/passSlice"
+import { setSignError, setRegError } from "./lib/features/passSlice"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Page() {
@@ -14,9 +14,6 @@ export default function Page() {
     const user = useSelector(state=>state.pass)
     const dispatch = useDispatch()
     const [newUser,setNewUser] = useState({})
-    const [post,setPost] = useState({})
-    // const [signError,setSignError] = useState('')
-    const [regError,setRegError] = useState('')
     const validName = new RegExp('[A-Za-z].{2,}')
     const validEmail = new RegExp('^[a-zA-Z0-9._:$!%-]+@[a-zA-z0-9.-]+.[a-zA-z]$')
     const validPwd = new RegExp('^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[._:$!%-]).{6,}$')
@@ -28,10 +25,12 @@ export default function Page() {
     },[user])
 
     useEffect(()=>{
-        if (post.signemail && post.signpass) {
-            dispatch(checkSignIn(post))
-        }
-    },[post])
+
+        setTimeout(()=>{
+            dispatch(setRegError(''))
+            dispatch(setSignError(''))
+        },3000)
+    },[user.signerror, user.regerror])
     // console.log((new Date(Date.now())).toTimeString(), 'date')
     function handleChange(e) {
         setNewUser({...newUser, [e.target.name]:e.target.value})
@@ -39,40 +38,34 @@ export default function Page() {
 
     function handleSign(e) {
         e.preventDefault()
-        setPost(newUser)
 
         if (!newUser.signemail || !validName.test(newUser.signemail)) {
             dispatch(setSignError('Type valid email'))
         } else if (!newUser.signpass || !validPwd.test(newUser.signpass)) {
             dispatch(setSignError('Type valid password'))
         } else {
+            dispatch(checkSignIn(newUser))
             setNewUser({})
         }
-        setTimeout(()=>{
-            dispatch(setSignError(''))
-        },1500)
     }
 
     function handleReg(e) {
         e.preventDefault()
         setPost(newUser)
         if (!newUser.regname || !validName.test(newUser.regname)) {
-            setRegError('Type valid name')
+            dispatch(setRegError('Type valid name'))
         } else if (!newUser.regemail || !validEmail.test(newUser.regemail)) {
-            setRegError('Type valid email')
+            dispatch(setRegError('Type valid email'))
         } else if (!newUser.regpass || !validPwd.test(newUser.regpass)) {
-            setRegError('A-z0-9._:$!%-')
+            dispatch(setRegError('A-z0-9._:$!%-'))
         } else if (!newUser.regpass2) {
-            setRegError('Confirm your password')
+            dispatch(setRegError('Confirm your password'))
         } else if (newUser.regpass !== newUser.regpass2) {
-            setRegError('Passwords don\'t match')
+            dispatch(setRegError('Passwords don\'t match'))
         } else {
-            setRegError('Success')
+            dispatch(setRegError('Success'))
             setNewUser({})
         }
-        setTimeout(()=>{
-            setRegError('')
-        },1500)
     }
     console.log(user, 'store')
     return(
@@ -91,7 +84,7 @@ export default function Page() {
             <Form>
                 <FormGroup className="flex flex-col rounder-md shadow-lg shadow-slate-500 p-7 mx-2">
                     <Label className="text-center text-3xl mb-2">Register</Label>
-                    <Label className={`text-center w-full h-auto ${regError === 'Success' ? 'text-lime-700' : 'text-red-400'}`}>{regError}</Label>
+                    <Label className={`text-center w-full h-auto ${user?.regerror === 'Success' ? 'text-lime-700' : 'text-red-400'}`}>{user?.regerror}</Label>
                     <Label for='regname'>Name</Label>
                     <Input id='regname' name='regname' className="h-8 px-1" autoComplete="username" onChange={(e)=>{handleChange(e)}} value={newUser.regname || ''}/>
                     <Label for='regemail'>Email</Label>

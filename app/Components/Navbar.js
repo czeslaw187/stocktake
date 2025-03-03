@@ -36,11 +36,11 @@ export default function NavBar() {
     function toggle() {
         setIsOpen(!isOpen)
     }
-
+    console.log(admin)
     return(
         <div className="bg-gradient-to-bl from-amber-300 to-indigo-400">
             <Navbar>
-                <NavbarBrand href="/Main">{admin.isadmin ? 'FU' : 'Admin'}</NavbarBrand>
+                <NavbarBrand href="/Main">{admin.isadmin ? 'ADMIN' : admin.name}</NavbarBrand>
                 <NavbarToggler onClick={toggle}/>
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar>
