@@ -76,7 +76,7 @@ export default function Page() {
     }
     console.log(user, 'store')
     return(
-        <div className="flex justify-center items-center w-screen h-screen">
+        <div className="flex flex-row flex-wrap justify-center items-center w-screen h-full md:h-screen">
             <Form>
                 <FormGroup className="flex flex-col rounder-md shadow-lg shadow-slate-500 p-7 mx-2">
                     <Label className="text-center text-3xl mb-2">Sign In</Label>
