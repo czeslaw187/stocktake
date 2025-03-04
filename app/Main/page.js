@@ -35,7 +35,7 @@ export default function Main_Page() {
     <div>
       <NavBar />
       <div className={`text-3xl text-center my-2 ${henPen.className}`}>Last Update</div>
-      <div className="w-[90%] h-[2rem] rounded shadow-md shadow-gray-500 mx-auto my-3 grid grid-cols-4 justify-items-center place-items-center">
+      <div className="w-[90%] h-[2rem] rounded shadow-md shadow-gray-500 mx-auto my-3 hidden md:grid grid-cols-4 justify-items-center place-items-center ">
         <div>Date</div>
         <div>Name</div>
         <div>Product</div>

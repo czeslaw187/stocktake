@@ -4,7 +4,7 @@ export default function LastEntryComponent({el}) {
     const minute = new Date(parseInt(el.date)).getMinutes()
     console.log(el)
     return(
-        <li className="w-[90%] h-auto md:h-[3rem] text-sm md:text-lg rounded shadow-md shadow-gray-500 mx-auto my-3 grid grid-cols-2 md:grid-cols-4 justify-items-start md:justify-items-center place-items-center">
+        <li className="w-[90%] h-auto md:h-[3rem] text-xs md:text-lg rounded shadow-md shadow-gray-500 mx-auto my-3 grid grid-cols-2 md:grid-cols-4 justify-items-start md:justify-items-center place-items-start md:place-items-center">
             <div>
                 <div>{day}</div>
                 <div>{hour}:{minute}</div>
