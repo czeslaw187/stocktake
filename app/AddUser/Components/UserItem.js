@@ -15,7 +15,7 @@ export default function UserItem({el}) {
             <div>{el.name}</div>
             <div>{el.email}</div>
             <div>
-                {el.password}
+                <input type="password" className="bg-inherit" value={el.password} disabled/>
             </div>
             <div>Admin {el.isadmin ? 'Yes' : 'No'}</div>
                 {el.isadmin ? null : <TrashUserModal el={el} />}
