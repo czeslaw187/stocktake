@@ -2,12 +2,12 @@ import Client from "pg/lib/client"
 
 export async function POST(req) {
     const request = await req.json()
-    const {id, quantity, date, name, product, amount} = request.obj
+    const {id, quantity, date, name, product, amount, unit} = request.obj
     const client = new Client(process.env.DB_URL)
     await client.connect()
     try {
         await client.query('UPDATE counter SET quantity=$1 WHERE id=$2',[quantity, id])
-        await client.query('INSERT INTO countentry (date, name, product, amount) VALUES ($1, $2, $3, $4)',[date, name, product, amount])
+        await client.query('INSERT INTO countentry (date, name, product, amount, category) VALUES ($1, $2, $3, $4, $5)',[date, name, product, amount, unit])
         return new Response(JSON.stringify({message: 'Item updated'}))
     } catch (error) {
         return new Response(JSON.stringify({message:error.message}))

@@ -8,7 +8,7 @@ import SignOut from "./SignOut";
 import { useRouter } from "next/navigation";
 import { setLogin } from "../lib/features/passSlice";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { clear_food } from "../lib/features/countSlice";
+import { clear_food, fetchCategories } from "../lib/features/countSlice";
 import { Bangers } from "next/font/google";
 
 const bangers = Bangers({
@@ -34,6 +34,11 @@ export default function NavBar() {
     function toggle() {
         setIsOpen(!isOpen)
     }
+
+    useEffect(()=>{
+        dispatch(fetchCategories())
+    },[])
+
     return(
         <div className="bg-gradient-to-bl from-amber-300 to-indigo-400">
             <Navbar>

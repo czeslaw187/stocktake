@@ -32,7 +32,7 @@ export default function UpdateFoodModal({el}) {
                 setError('')
             }, 3000);
         } else {
-            dispatch(updateFoodItem({quantity:qnt, id:id, date:now, name:user.currentUser[0].name, product:el.name, amount:deduct}))
+            dispatch(updateFoodItem({quantity:qnt, id:id, date:now, name:user.currentUser[0].name, product:el.name, amount:deduct, unit:el.unit,}))
             toggle()
         }
         

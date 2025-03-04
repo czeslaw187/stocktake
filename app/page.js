@@ -79,7 +79,7 @@ export default function Page() {
                     <button className="w-[10rem] h-[3rem] rounded-md bg-amber-300 mx-auto mt-2 hover:bg-amber-400 active:shadow-inner active:shadow-black" onClick={(e)=>{handleSign(e)}}>Submit</button>
                 </FormGroup>
             </Form>
-            <Form>
+            <Form hidden>
                 <FormGroup className="flex flex-col rounder-md shadow-lg shadow-slate-500 p-7 mx-2">
                     <Label className="text-center text-3xl mb-2">Register</Label>
                     <Label className={`text-center w-full h-auto ${user?.regerror === 'Success' ? 'text-lime-700' : 'text-red-400'}`}>{user?.regerror}</Label>
