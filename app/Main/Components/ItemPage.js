@@ -32,7 +32,7 @@ export default function ItemPage({slug}) {
             <NavBar />
             <div className={`text-center text-3xl my-2 ${henpen.className}`}>{slug}</div>
                 {user.isAdmin ? <CreateItemModal slug={slug} /> : null}
-                <ul className="w-full h-max text-center flex flex-row flex-wrap">
+                <ul className="w-full h-max text-center flex flex-row flex-wrap pl-0">
                     {
                         filtered && filtered.map((el,id)=>{
                             return(

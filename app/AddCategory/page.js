@@ -45,7 +45,7 @@ export default function AddCategoryPage() {
             <div className={`text-center text-3xl my-2 ${henPen.className}`}>Categories</div>
             <CreateCategoryModal />
             <div className={`w-full text-center font-bold}`}>{error}</div>
-                <ul>
+                <ul className="pl-0">
                     {
                         categories && categories.map((el,id)=>{
                             return(
