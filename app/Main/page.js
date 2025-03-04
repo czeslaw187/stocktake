@@ -7,6 +7,7 @@ import { Ultra } from "next/font/google";
 import { fetchCategories } from "../lib/features/countSlice";
 import { useEffect } from "react";
 import LastEntryComponent from "./Components/LastEntryComponent";
+import { fetchEntries } from "../lib/features/entrySlice";
 
 const ultra = Ultra({
   subsets: ['latin'],
@@ -16,23 +17,29 @@ const ultra = Ultra({
 export default function Main_Page() {
 
   const store = useSelector(state=>state.count)
-  const user = useSelector(state=>state.pass)
+  const entries = useSelector(state=>state.entry)
+
   const dispatch = useDispatch()
-  const theFood = store.food
 
   useEffect(() => {
-    if (!user.categories) {
+    if (!store.categories) {
       dispatch(fetchCategories())
     }
+    dispatch(fetchEntries())
   }, []);
 
-  console.log(theFood, 'store')
-  console.log(user, 'user')
+  console.log(entries, 'user')
   return(
     <div>
       <NavBar />
       <ul className={`w-screen h-auto flex flex-row flex-wrap mt-3 pl-0 ${ultra.className}`}>
-        <LastEntryComponent />
+        {
+          entries.entries && entries.entries.map((el,id)=>{
+            return(
+              <LastEntryComponent key={id} el={el} />
+            )
+          })
+        }
       </ul>
     </div>
   )

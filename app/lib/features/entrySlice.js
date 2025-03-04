@@ -23,5 +23,5 @@ export const {get_entries} = entrySlice.actions
 export default entrySlice.reducer
 
 export const fetchEntries =()=> async dispatch => {
-    await axios.get(process.env.NEXT_PUBLIC_URL + '/api/fetchEntries').then((resp)=>{dispatch(get_entries(resp.data.entries))})
+    await axios.get(process.env.NEXT_PUBLIC_URL + '/api/fetchEntries').then((resp)=>{console.log(resp.data, 'action'); dispatch(get_entries(resp.data))})
 }
