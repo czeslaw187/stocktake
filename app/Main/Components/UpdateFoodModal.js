@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Button, ButtonGroup, Label, Modal, ModalBody, ModalHeader } from "reactstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { updateFoodItem } from "@/app/lib/features/countSlice"
+import { fetchUsers } from "@/app/lib/features/passSlice"
 
 export default function UpdateFoodModal({el}) {
 
@@ -23,13 +24,15 @@ export default function UpdateFoodModal({el}) {
     }
 
     function handleSubmit(qnt, id) {
+        const now = Date.now()
+        const deduct = amount - el.quantity
         if (!user.isAdmin && amount > el.quantity) {
             setError('Need Admin privilage to add')
             setTimeout(() => {
                 setError('')
             }, 3000);
         } else {
-            dispatch(updateFoodItem({quantity:qnt, id:id}))
+            dispatch(updateFoodItem({quantity:qnt, id:id, date:now, name:user.currentUser[0].name, product:el.name, amount:deduct}))
             toggle()
         }
         
@@ -52,7 +55,7 @@ export default function UpdateFoodModal({el}) {
                     onClick={toggle}>
             UPDATE
             </button>
-            <Modal isOpen={modal} toggle={toggle} backdrop={false} className="">
+            <Modal isOpen={modal} toggle={toggle} backdrop={false}>
                 <ModalHeader close={closeBtn}>
                     {error ? error : 'Update stock amount'} 
                 </ModalHeader>

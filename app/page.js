@@ -66,7 +66,6 @@ export default function Page() {
             setNewUser({})
         }
     }
-    console.log(user, 'store')
     return(
         <div className="flex flex-row flex-wrap justify-center items-center w-screen h-full md:h-screen">
             <Form>
