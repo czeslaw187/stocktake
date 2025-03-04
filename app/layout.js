@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Keg Counter",
   description: "Stock counter for the Hase",
-  author: 'Grzegorz Michniewicz'
+  author: 'Grzegorz Michniewicz',
 };
 
 export default function RootLayout({ children }) {
