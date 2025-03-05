@@ -45,8 +45,8 @@ export default function NavBar() {
                 <NavbarBrand href="/Main">{admin.isAdmin ? 'ADMIN' : admin.currentUser[0]?.name}</NavbarBrand>
                 <NavbarToggler onClick={toggle}/>
                 <Collapse isOpen={isOpen} navbar>
-                    <Nav className="ml-auto" navbar>
-                    <NavItem hidden={admin.isAdmin ? false : true}>
+                    <Nav className="ml-auto divide-y-4 w-[100%] md:w-[20%]" navbar>
+                        <NavItem hidden={admin.isAdmin ? false : true}>
                             <NavLink href={'/AddUser'} className={`${bangers.className} text-right mr-2`}>
                                 <div className="text-xl">Add User</div>
                             </NavLink>

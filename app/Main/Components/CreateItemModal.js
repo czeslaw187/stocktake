@@ -18,7 +18,7 @@ export default function CreateItemModal({slug}) {
     }
 
     function handleChange(e) {
-        setItem({...item,[e.target.name]:e.target.value,category: slug})
+        setItem({...item,[e.target.name]:e.target.value,category: slug, quantity:0})
     }
 
     function handleAddItem(e) {
@@ -51,7 +51,7 @@ export default function CreateItemModal({slug}) {
                             <Label for='unit'>Unit</Label>
                             <Input name='unit' onChange={(e)=>{handleChange(e)}} value={item.unit || ''} required/>
                             <Label for='qantity'>Quantity</Label>
-                            <Input name='quantity' type='number' onChange={(e)=>{handleChange(e)}} value={item.quantity || ''} required/>
+                            <Input name='quantity' type='number' onChange={(e)=>{handleChange(e)}} value={0} disabled/>
                             <Label for='category'>Category</Label>
                             <Input name='category' value={slug} disabled required/>
                         </FormGroup>
