@@ -56,6 +56,11 @@ export default function NavBar() {
                                 <div className="text-xl">Add Category</div>
                             </NavLink>
                         </NavItem>
+                        <NavItem>
+                            <NavLink href={'/ClockIn'} className={`${bangers.className} text-right mr-2`}>
+                                <div className="text-xl">Clock In</div>
+                            </NavLink>
+                        </NavItem>
                         {
                             categories && categories.map((el,id)=>{
                                 return(
