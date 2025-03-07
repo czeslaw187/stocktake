@@ -5,7 +5,6 @@ import storage from 'redux-persist/lib/storage'
 import countReducer from './features/countSlice'
 import passReducer from './features/passSlice'
 import entryReducer from './features/entrySlice'
-import hoursReducer from './features/hoursSlice'
 
 const persistConfig = {
   key: 'persist',
@@ -15,8 +14,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   count: countReducer,
   pass: passReducer,
-  entry: entryReducer,
-  hours: hoursReducer
+  entry: entryReducer
 })
 
 const makeConfiguredStore = () =>

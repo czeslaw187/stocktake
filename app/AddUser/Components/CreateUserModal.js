@@ -18,7 +18,7 @@ export default function CreateUserModal() {
     }
 
     function handleChange(e) {
-        setCreds({...creds,[e.target.name]:e.target.value, isadmin: false})
+        setCreds({...creds,[e.target.name]:e.target.value, isadmin: false, clock: '', hours: 0, isin: false})
     }
 
     function handleSubmit() {
