@@ -33,6 +33,12 @@ export default function ClockIn_Page() {
                     userId: user.currentUser[0].id,
                     isIn: !user.currentUser[0].isin
                 }
+                const hour = {
+                    userId: user.currentUser[0].id,
+                    name: user.currentUser[0].name,
+                    email: user.currentUser[0].email,
+                    clock: Date.now()
+                }
                 dispatch(clockIn(entry))
             }
             setProx(true)
