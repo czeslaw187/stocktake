@@ -25,7 +25,7 @@ export default function NavBar() {
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        if (!admin.isLogged) {
+        if (!admin.isLogged || !admin.currentUser) {
             dispatch(clear_food())
             router.push('/')
         }
