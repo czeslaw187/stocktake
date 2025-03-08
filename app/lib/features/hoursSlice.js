@@ -29,3 +29,7 @@ export const fetchHours =(obj)=> async dispatch => {
 export const addHour =(obj)=> async dispatch => {
     await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addHour',{obj}).then((resp)=>{dispatch(setError(resp.data.message))})
 }
+
+export const clearHours =()=> async dispatch => {
+    await axios.get(process.env.NEXT_PUBLIC_URL + '/api/clearHours').then((resp)=>{dispatch(setError(resp.data.message))})
+}

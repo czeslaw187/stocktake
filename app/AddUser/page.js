@@ -7,6 +7,7 @@ import UserItem from "./Components/UserItem"
 import NavBar from "../Components/Navbar"
 import { Henny_Penny } from "next/font/google"
 import CreateUserModal from "./Components/CreateUserModal"
+import ClearHoursModal from "./Components/ClearHoursModal"
 
 const henPen = Henny_Penny({
     subsets: ['latin'],
@@ -36,6 +37,7 @@ export default function AddUser() {
             <div className="w-[90%] mx-auto mt-10 rounded">
             <div className={`text-center text-3xl my-2 ${henPen.className}`}>Users</div>
                 <CreateUserModal />
+                <ClearHoursModal />
             <div className={`w-full text-center font-bold}`}>{error}</div>
                 <ul className="pl-0">
                     {
