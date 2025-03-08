@@ -47,7 +47,7 @@ export const fetchAllUsers =()=> async dispatch => {
 }
 
 export const fetchUsers =(obj)=> async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/fetchUsers',{obj}).then((resp)=>{console.log(resp, 'actions'); dispatch(getCurrentUser(resp.data))})
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/fetchUsers',{obj}).then((resp)=>{dispatch(getCurrentUser(resp.data))})
 }
 
 export const checkSignIn =(obj)=> async dispatch => {

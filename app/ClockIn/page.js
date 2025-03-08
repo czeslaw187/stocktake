@@ -25,7 +25,7 @@ export default function ClockIn_Page() {
     const [prox,setProx] = useState(false)
     // const hase = [53.72441,-0.43560]
     const hase = [53.73937, -0.37347]
-
+    //-------------------------------ON CLOCK IN------------------------------------------
     function handleClockIn() {
         if (position.latitude > (hase[0] + 0.00011) || position.latitude < (hase[0] - 0.00011) || position.longitude > (hase[1] + 0.0003) || position.longitude < (hase[1] - 0.0003)) {
             dispatch(setRegError('You are out of range'))
@@ -43,12 +43,12 @@ export default function ClockIn_Page() {
                     clock: Date.now()
                 }
                 dispatch(clockIn(entry))
-                dispatch(addHour(hour))
             }
             setProx(true)
+            dispatch(addHour(hour))
         }
     }
-
+    //--------------------------------------ON PAGE LOAD-------------------------------------------------
     useEffect(()=>{
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position,error)=>{
@@ -60,9 +60,9 @@ export default function ClockIn_Page() {
         }
         dispatch(fetchAllUsers())
         dispatch(fetchHours(user.currentUser[0].id))
-        console.log('fetch')
+        console.log(hours,'hours')
     },[])
-
+    //--------------------------------AFTER CLOCK IN----------------------------------------
     useEffect(()=>{
         setTimeout(() => {
             dispatch(setRegError(''))
@@ -72,7 +72,7 @@ export default function ClockIn_Page() {
             dispatch(fetchHours({userId:user.currentUser[0].id}))
         }
     },[user.regerror])
-
+    //-------------------------------------COMPONENT----------------------------------------
     return(
         <div className="flex flex-column justify-center">
             <NavBar />
@@ -86,7 +86,7 @@ export default function ClockIn_Page() {
             <div className="w-full text-center">{user.regerror}</div>
             <ul>
             {
-                hours && hours.map((el,id)=>{
+                hours.hours && hours.hours.map((el,id)=>{
                     return(
                         <HourItemComponent key={id} el={el} />
                     )
