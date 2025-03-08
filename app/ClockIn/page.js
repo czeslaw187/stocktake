@@ -23,8 +23,8 @@ export default function ClockIn_Page() {
     const dispatch = useDispatch()
     const [position,setPosition] = useState({})
     const [prox,setProx] = useState(false)
-    // const hase = [53.72441,-0.43560]
-    const hase = [53.73937, -0.37347]
+    const hase = [53.72441,-0.43560]
+    // const hase = [53.73937, -0.37347]
     //-------------------------------ON CLOCK IN------------------------------------------
     function handleClockIn() {
         if (position.latitude > (hase[0] + 0.00011) || position.latitude < (hase[0] - 0.00011) || position.longitude > (hase[1] + 0.0003) || position.longitude < (hase[1] - 0.0003)) {
