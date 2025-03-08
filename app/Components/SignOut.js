@@ -3,6 +3,7 @@ import { Luckiest_Guy } from "next/font/google"
 import { getCurrentUser, getUsers } from "../lib/features/passSlice"
 import { get_all_food, get_categories } from "../lib/features/countSlice"
 import { get_entries } from "../lib/features/entrySlice"
+import { getHours } from "../lib/features/hoursSlice"
 
 const lucky = Luckiest_Guy({
     subsets: ['latin'],
@@ -20,6 +21,7 @@ export default function SignOut({setLogin}) {
         dispatch(get_all_food([]))
         dispatch(get_categories([]))
         dispatch(get_entries([]))
+        dispatch(getHours([]))
     }
 
     return(

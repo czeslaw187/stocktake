@@ -40,12 +40,13 @@ export default function ClockIn_Page() {
                     userId: user.currentUser[0].id,
                     name: user.currentUser[0].name,
                     email: user.currentUser[0].email,
-                    clock: Date.now()
+                    clock: Date.now(),
+                    isin: user.currentUser[0].isin
                 }
                 dispatch(clockIn(entry))
+                dispatch(addHour(hour))
             }
             setProx(true)
-            dispatch(addHour(hour))
         }
     }
     //--------------------------------------ON PAGE LOAD-------------------------------------------------
@@ -60,7 +61,7 @@ export default function ClockIn_Page() {
         }
         dispatch(fetchAllUsers())
         dispatch(fetchHours(user.currentUser[0].id))
-        console.log(hours,'hours')
+        
     },[])
     //--------------------------------AFTER CLOCK IN----------------------------------------
     useEffect(()=>{
@@ -72,6 +73,7 @@ export default function ClockIn_Page() {
             dispatch(fetchHours({userId:user.currentUser[0].id}))
         }
     },[user.regerror])
+    console.log(hours,'hours')
     //-------------------------------------COMPONENT----------------------------------------
     return(
         <div className="flex flex-column justify-center">
