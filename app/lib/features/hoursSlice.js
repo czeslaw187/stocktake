@@ -23,5 +23,9 @@ export const {getHours, setError} = hoursSlice.actions
 export default hoursSlice.reducer
 
 export const fetchHours =(obj)=> async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/fetchHours').then((resp)=>{dispatch(getHours(resp.data))})
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/fetchHours',{obj}).then((resp)=>{dispatch(getHours(resp.data))})
+}
+
+export const addHour =(obj)=> async dispatch => {
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addHour',{obj}).then((resp)=>{dispatch(setError(resp.data.message))})
 }

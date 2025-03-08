@@ -5,6 +5,8 @@ import NavBar from "../Components/Navbar";
 import { useEffect, useState } from "react";
 import { Luckiest_Guy, Parkinsans } from "next/font/google";
 import { clockIn, fetchAllUsers, fetchUsers, setRegError } from "../lib/features/passSlice";
+import HourItemComponent from "./Components/HourItemComponent";
+import { addHour, fetchHours } from "../lib/features/hoursSlice";
 
 const lucGuy = Luckiest_Guy({
     subsets:['latin'],
@@ -17,6 +19,7 @@ const parks = Parkinsans({
 export default function ClockIn_Page() {
 
     const user = useSelector(state=>state.pass)
+    const hours = useSelector(state=>state.hours)
     const dispatch = useDispatch()
     const [position,setPosition] = useState({})
     const [prox,setProx] = useState(false)
@@ -40,6 +43,7 @@ export default function ClockIn_Page() {
                     clock: Date.now()
                 }
                 dispatch(clockIn(entry))
+                dispatch(addHour(hour))
             }
             setProx(true)
         }
@@ -55,6 +59,8 @@ export default function ClockIn_Page() {
             })
         }
         dispatch(fetchAllUsers())
+        dispatch(fetchHours(user.currentUser[0].id))
+        console.log('fetch')
     },[])
 
     useEffect(()=>{
@@ -63,10 +69,10 @@ export default function ClockIn_Page() {
         }, 3000);
         if (user.currentUser.length > 0) {
             dispatch(fetchUsers({userId:user.currentUser[0].id}))
+            dispatch(fetchHours({userId:user.currentUser[0].id}))
         }
     },[user.regerror])
 
-    console.log(user)
     return(
         <div className="flex flex-column justify-center">
             <NavBar />
@@ -78,6 +84,15 @@ export default function ClockIn_Page() {
                 <div className={`${parks.className} text-2xl`}>{user.currentUser[0]?.name}</div>
             </div>
             <div className="w-full text-center">{user.regerror}</div>
+            <ul>
+            {
+                hours && hours.map((el,id)=>{
+                    return(
+                        <HourItemComponent key={id} el={el} />
+                    )
+                })
+            }
+            </ul>
         </div>
     )
 }
