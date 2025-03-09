@@ -7,6 +7,7 @@ import { Luckiest_Guy, Parkinsans } from "next/font/google";
 import { clockIn, fetchAllUsers, fetchUsers, setRegError } from "../lib/features/passSlice";
 import HourItemComponent from "./Components/HourItemComponent";
 import { addHour, fetchHours } from "../lib/features/hoursSlice";
+import MyHours from "./Components/MyHours";
 
 const lucGuy = Luckiest_Guy({
     subsets:['latin'],
@@ -23,8 +24,8 @@ export default function ClockIn_Page() {
     const dispatch = useDispatch()
     const [position,setPosition] = useState({})
     const [prox,setProx] = useState(false)
-    const hase = [53.72441,-0.43560]
-    // const hase = [53.73937, -0.37347]
+    // const hase = [53.72441,-0.43560]
+    const hase = [53.73937, -0.37347]
     
     //-------------------------------ON CLOCK IN------------------------------------------
     function handleClockIn() {
@@ -74,7 +75,9 @@ export default function ClockIn_Page() {
             dispatch(fetchHours({userId:user.currentUser[0].id}))
         }
     },[user.regerror])
-    console.log(hours,'hours')
+    
+    
+
     //-------------------------------------COMPONENT----------------------------------------
     return(
         <div className="flex flex-column justify-center">
@@ -85,6 +88,7 @@ export default function ClockIn_Page() {
                     {user.currentUser[0]?.isin ? 'Clock Out' : 'Clock In'}
                 </button>
                 <div className={`${parks.className} text-2xl`}>{user.currentUser[0]?.name}</div>
+                <MyHours hours={hours} />
             </div>
             <div className="w-full text-center">{user.regerror}</div>
             <ul>
