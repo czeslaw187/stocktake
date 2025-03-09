@@ -7,7 +7,7 @@ export async function GET(req) {
         await client.query('DELETE FROM counterhours')
         return new Response(JSON.stringify({message: 'Records deleted'}))
     } catch (error) {
-        return new Response(JSON.stringify({Message:error.message}))
+        return new Response(JSON.stringify({message:error.message}))
     } finally {
         client.end()
     }

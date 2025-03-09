@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser, setRegError } from "@/app/lib/features/passSlice";
 
 
-export default function CreateUserModal() {
+export default function CreateUserModal({bangers}) {
 
     const error = useSelector(state=>state.pass.regerror)
     const [modal,setModal] = useState(false)
@@ -33,9 +33,8 @@ export default function CreateUserModal() {
     }
 
     return(
-        <div className="w-full text-center my-3">
-            <button className="w-[15rem] h-[4rem] rounded-md ml-auto bg-gradient-to-br from-slate-300 to-cyan-300 hover:to-cyan-500 active:shadow-slate-600 active:shadow-inner"
-                    onClick={toggle}>
+        <div className={`w-[15rem] h-[4rem] flex justify-center place-content-center rounded-md bg-gradient-to-br from-slate-300 to-cyan-300 hover:to-cyan-500 active:shadow-slate-600 active:shadow-inner ${bangers.className}`}>
+            <button onClick={toggle}>
                 Create New User
             </button>
             <Modal isOpen={modal} toggle={toggle} backdrop={false}>

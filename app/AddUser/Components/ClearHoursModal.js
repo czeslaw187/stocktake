@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { Button, Modal, ModalBody, ModalHeader } from "reactstrap"
 
-export default function ClearHoursModal({el}) {
+export default function ClearHoursModal({bangers}) {
 
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
     const [modal,setModal] = useState(false)
@@ -19,9 +19,8 @@ export default function ClearHoursModal({el}) {
     }
 
     return(
-        <div>
-            <button className="w-[15rem] h-[4rem] rounded-md ml-auto bg-gradient-to-br from-slate-300 to-cyan-300 hover:to-cyan-500 active:shadow-slate-600 active:shadow-inner"
-                    onClick={toggle}>
+        <div className={`w-[15rem] h-[4rem] flex justify-center place-content-center rounded-md bg-gradient-to-br from-slate-300 to-cyan-300 hover:to-cyan-500 active:shadow-slate-600 active:shadow-inner ${bangers.className}`}>
+            <button onClick={toggle}>
                 Clear User Hours
             </button>
             <Modal isOpen={modal} toggle={toggle} backdrop={false}>
