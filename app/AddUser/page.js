@@ -8,6 +8,7 @@ import NavBar from "../Components/Navbar"
 import { Henny_Penny, Bangers } from "next/font/google"
 import CreateUserModal from "./Components/CreateUserModal"
 import ClearHoursModal from "./Components/ClearHoursModal"
+import { fetchHours } from "../lib/features/hoursSlice"
 
 const henPen = Henny_Penny({
     subsets: ['latin'],
@@ -24,9 +25,15 @@ export default function AddUser() {
     const dispatch = useDispatch()
     const users = useSelector(state=>state.pass.users)
     const error = useSelector(state=>state.pass)
+    const hours = useSelector(state=>state.hours)
 
     useEffect(()=>{
-        dispatch(fetchAllUsers())
+        if (users) {
+            dispatch(fetchAllUsers())
+        }
+        if (hours.hours) {
+            dispatch(fetchHours({userId: error.currentUser[0].id}))
+        }
     },[])
 
     useEffect(()=>{
@@ -35,7 +42,7 @@ export default function AddUser() {
             dispatch(setRegError(''))
         }, 3000);
     },[error.regerror])
-
+    console.log(error, hours)
     return(
         <div>
             <NavBar />
@@ -50,7 +57,7 @@ export default function AddUser() {
                     {
                         users && users.map((el,id)=>{
                             return(
-                                <UserItem key={id} el={el} />
+                                <UserItem key={id} el={el} error={error}/>
                             )
                         })
                     }

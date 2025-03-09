@@ -5,11 +5,11 @@ export default function MyHours({hours}) {
     const three = one.map((el,id)=>{return el - two[id]})
     const four = three.reduce((a,b)=>a+b, 0)
     const minutes = Math.round((four)/(1000 * 60))
-    const hour = Math.round(minutes / 60)
+    const hour = Math.floor(minutes / 60)
     const min = Math.round(minutes % 60)
     console.log(hour, 'hours')
     
     return(
-        <div className="text-2xl">{hours.hours[0]?.inout ? `${min}min` : 'In'}</div>
+        <div className="text-2xl">{hours.hours[0]?.inout ? `${hour}h ${min}min` : 'In'}</div>
     )
 }
