@@ -9,7 +9,7 @@ const bangers = Bangers({
     weight: '400'
 })
 
-export default function UserItem({el, error}) {
+export default function UserItem({el}) {
 
     const [reveal,setReveal] = useState(false)
 

@@ -57,7 +57,7 @@ export default function AddUser() {
                     {
                         users && users.map((el,id)=>{
                             return(
-                                <UserItem key={id} el={el} error={error}/>
+                                <UserItem key={id} el={el} />
                             )
                         })
                     }

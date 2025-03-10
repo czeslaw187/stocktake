@@ -3,7 +3,8 @@ import axios from "axios";
 
 const initialState = {
     hours: [],
-    error: ''
+    error: '',
+    total: []
 }
 
 export const hoursSlice = createSlice({
@@ -15,11 +16,14 @@ export const hoursSlice = createSlice({
         },
         setError: (state, action)=> {
             state.error = action.payload
+        },
+        setTotal: (state, action)=> {
+            state.total = action.payload
         }
     }
 })
 
-export const {getHours, setError} = hoursSlice.actions
+export const {getHours, setError, setTotal} = hoursSlice.actions
 export default hoursSlice.reducer
 
 export const fetchHours =(obj)=> async dispatch => {

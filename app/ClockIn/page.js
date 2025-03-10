@@ -6,8 +6,7 @@ import { useEffect, useState } from "react";
 import { Luckiest_Guy, Parkinsans } from "next/font/google";
 import { clockIn, fetchAllUsers, fetchUsers, setRegError } from "../lib/features/passSlice";
 import HourItemComponent from "./Components/HourItemComponent";
-import { addHour, fetchHours } from "../lib/features/hoursSlice";
-import MyHours from "./Components/MyHours";
+import { addHour, fetchHours, setTotal } from "../lib/features/hoursSlice";
 
 const lucGuy = Luckiest_Guy({
     subsets:['latin'],
@@ -26,6 +25,14 @@ export default function ClockIn_Page() {
     const [prox,setProx] = useState(false)
     // const hase = [53.72441,-0.43560]
     const hase = [53.73937, -0.37347]
+
+    const one = hours.hours.filter(el=>el.inout === true).map(el=>parseInt(el.clocked))
+    const two = hours.hours.filter(el=>el.inout === false).map(el=>parseInt(el.clocked))
+    const three = one.map((el,id)=>{return el - two[id]})
+    const four = three.reduce((a,b)=>a+b, 0)
+    const minutes = Math.round((four)/(1000 * 60))
+    const hrs = Math.floor(minutes / 60)
+    const min = Math.round(minutes % 60)
     
     //-------------------------------ON CLOCK IN------------------------------------------
     function handleClockIn() {
@@ -36,7 +43,7 @@ export default function ClockIn_Page() {
             if (user.currentUser[0]) {
                 const entry = {
                     userId: user.currentUser[0].id,
-                    isIn: !user.currentUser[0].isin
+                    isIn: !user.currentUser[0].isin,
                 }
                 const hour = {
                     userId: user.currentUser[0].id,
@@ -47,6 +54,7 @@ export default function ClockIn_Page() {
                 }
                 dispatch(clockIn(entry))
                 dispatch(addHour(hour))
+                dispatch(setTotal([hrs, min]))
             }
             setProx(true)
         }
@@ -67,17 +75,17 @@ export default function ClockIn_Page() {
     },[])
     //--------------------------------AFTER CLOCK IN----------------------------------------
     useEffect(()=>{
-        setTimeout(() => {
-            dispatch(setRegError(''))
-        }, 3000);
         if (user.currentUser.length > 0) {
             dispatch(fetchUsers({userId:user.currentUser[0].id}))
             dispatch(fetchHours({userId:user.currentUser[0].id}))
         }
+        setTimeout(() => {
+            dispatch(setRegError(''))
+        }, 3000);
     },[user.regerror])
     
     
-
+    console.log(hours)
     //-------------------------------------COMPONENT----------------------------------------
     return(
         <div className="flex flex-column justify-center">
@@ -88,7 +96,7 @@ export default function ClockIn_Page() {
                     {user.currentUser[0]?.isin ? 'Clock Out' : 'Clock In'}
                 </button>
                 <div className={`${parks.className} text-2xl`}>{user.currentUser[0]?.name}</div>
-                <MyHours hours={hours} />
+                <div className="text-2xl">{hours.hours[0]?.inout ? `${hrs}h ${min}min` : 'In'}</div>
             </div>
             <div className="w-full text-center">{user.regerror}</div>
             <ul>

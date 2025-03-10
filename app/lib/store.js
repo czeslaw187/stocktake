@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
+import { persistStore, persistReducer, createMigrate, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 import countReducer from './features/countSlice'
@@ -7,9 +7,25 @@ import passReducer from './features/passSlice'
 import entryReducer from './features/entrySlice'
 import hoursReducer from './features/hoursSlice'
 
+const migrations = {
+  0: (state)=> {
+    return {
+      ...state,
+      device: undefined
+    }
+  },
+  1: (state)=> {
+    return {
+      device: state.device
+    }
+  }
+}
+
 const persistConfig = {
-  key: 'persist',
+  key: 'primary',
+  version: 1,
   storage,
+  migrate: createMigrate(migrations, {debug: false})
 }
 
 const rootReducer = combineReducers({
