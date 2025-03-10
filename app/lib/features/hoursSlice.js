@@ -4,7 +4,6 @@ import axios from "axios";
 const initialState = {
     hours: [],
     error: '',
-    total: []
 }
 
 export const hoursSlice = createSlice({
@@ -17,9 +16,6 @@ export const hoursSlice = createSlice({
         setError: (state, action)=> {
             state.error = action.payload
         },
-        setTotal: (state, action)=> {
-            state.total = action.payload
-        }
     }
 })
 

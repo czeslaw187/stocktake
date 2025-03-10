@@ -8,7 +8,6 @@ import NavBar from "../Components/Navbar"
 import { Henny_Penny, Bangers } from "next/font/google"
 import CreateUserModal from "./Components/CreateUserModal"
 import ClearHoursModal from "./Components/ClearHoursModal"
-import { fetchHours } from "../lib/features/hoursSlice"
 
 const henPen = Henny_Penny({
     subsets: ['latin'],
@@ -31,9 +30,9 @@ export default function AddUser() {
         if (users) {
             dispatch(fetchAllUsers())
         }
-        if (hours.hours) {
-            dispatch(fetchHours({userId: error.currentUser[0].id}))
-        }
+        // if (hours.hours) {
+        //     dispatch(fetchHours({userId: error.currentUser[0].id}))
+        // }
     },[])
 
     useEffect(()=>{
@@ -57,7 +56,7 @@ export default function AddUser() {
                     {
                         users && users.map((el,id)=>{
                             return(
-                                <UserItem key={id} el={el} />
+                                <UserItem key={id} el={el} hours={hours}/>
                             )
                         })
                     }

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Luckiest_Guy, Parkinsans } from "next/font/google";
 import { clockIn, fetchAllUsers, fetchUsers, setRegError } from "../lib/features/passSlice";
 import HourItemComponent from "./Components/HourItemComponent";
-import { addHour, fetchHours, setTotal } from "../lib/features/hoursSlice";
+import { addHour, fetchHours } from "../lib/features/hoursSlice";
 
 const lucGuy = Luckiest_Guy({
     subsets:['latin'],
@@ -54,7 +54,6 @@ export default function ClockIn_Page() {
                 }
                 dispatch(clockIn(entry))
                 dispatch(addHour(hour))
-                dispatch(setTotal([hrs, min]))
             }
             setProx(true)
         }

@@ -18,17 +18,17 @@ export default function UserItem({el}) {
     }
 
     return(
-        <li className={`h-auto md:h-[6rem] my-3 grid grid-cols-1 md:grid-cols-5 justify-items-center place-items-center shadow-md text-lg ${bangers.className} ${el.isin ? 'shadow-green-600' : 'shadow-red-600'}`}>
+        <li className={`h-auto md:h-[6rem] my-3 grid grid-cols-1 md:grid-cols-6 justify-items-center place-items-center shadow-md text-lg ${bangers.className} ${el.isin ? 'shadow-green-600' : 'shadow-red-600'}`}>
             <div>{el.name}</div>
             <div>{el.email}</div>
-            <div>
-                <input name={'password'} type={reveal ? 'text' : 'password'} className="bg-inherit text-center" value={el.password} disabled/>
+            <div className="flex">
+                <input name={'password'} type={reveal ? 'text' : 'password'} className="bg-inherit text-center w-auto" value={el.password} disabled/>
                 <button onClick={toggle}>
                     {<FontAwesomeIcon icon={reveal ? faEye : faEyeSlash} />}
                 </button>
             </div>
             <div>Admin {el.isadmin ? 'Yes' : 'No'}</div>
-                {el.isadmin ? null : <TrashUserModal el={el} />}
+            {el.isadmin ? null : <TrashUserModal el={el} />}
         </li>
     )
 }
