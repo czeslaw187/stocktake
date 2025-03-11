@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { Button, Modal, ModalBody, ModalHeader } from "reactstrap"
 
-export default function ClearHoursModal({bangers}) {
+export default function ClearHoursModal({el, faStopwatch, FontAwesomeIcon}) {
 
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
     const [modal,setModal] = useState(false)
@@ -12,16 +12,16 @@ export default function ClearHoursModal({bangers}) {
     function toggle() {
         setModal(!modal)
     }
-
+    
     function handleSubmit() {
-        dispatch(clearHours())
+        dispatch(clearHours({userId: el.id}))
         toggle()
     }
-
+    
     return(
-        <div className={`w-[15rem] h-[4rem] flex justify-center place-content-center rounded-md bg-gradient-to-br from-slate-300 to-cyan-300 hover:to-cyan-500 active:shadow-slate-600 active:shadow-inner ${bangers.className}`}>
+        <div>
             <button onClick={toggle}>
-                Clear User Hours
+                <FontAwesomeIcon icon={faStopwatch} />
             </button>
             <Modal isOpen={modal} toggle={toggle} backdrop={false}>
                 <ModalHeader close={closeBtn}>Confirm your decision</ModalHeader>

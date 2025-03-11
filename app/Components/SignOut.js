@@ -22,7 +22,6 @@ export default function SignOut({setLogin}) {
         dispatch(get_categories([]))
         dispatch(get_entries([]))
         dispatch(getHours([]))
-        dispatch(setTotal([]))
     }
 
     return(

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Luckiest_Guy, Parkinsans } from "next/font/google";
 import { clockIn, fetchAllUsers, fetchUsers, setRegError } from "../lib/features/passSlice";
 import HourItemComponent from "./Components/HourItemComponent";
-import { addHour, fetchHours } from "../lib/features/hoursSlice";
+import { addHour, fetchHours, insertHours } from "../lib/features/hoursSlice";
 
 const lucGuy = Luckiest_Guy({
     subsets:['latin'],
@@ -26,14 +26,10 @@ export default function ClockIn_Page() {
     // const hase = [53.72441,-0.43560]
     const hase = [53.73937, -0.37347]
 
-    const one = hours.hours.filter(el=>el.inout === true).map(el=>parseInt(el.clocked))
-    const two = hours.hours.filter(el=>el.inout === false).map(el=>parseInt(el.clocked))
-    const three = one.map((el,id)=>{return el - two[id]})
-    const four = three.reduce((a,b)=>a+b, 0)
-    const minutes = Math.round((four)/(1000 * 60))
-    const hrs = Math.floor(minutes / 60)
-    const min = Math.round(minutes % 60)
     
+    
+    const [minutes,setMinutes] = useState(0)
+
     //-------------------------------ON CLOCK IN------------------------------------------
     function handleClockIn() {
         if (position.latitude > (hase[0] + 0.00011) || position.latitude < (hase[0] - 0.00011) || position.longitude > (hase[1] + 0.0003) || position.longitude < (hase[1] - 0.0003)) {
@@ -54,6 +50,12 @@ export default function ClockIn_Page() {
                 }
                 dispatch(clockIn(entry))
                 dispatch(addHour(hour))
+                if (!user.currentUser[0].isin) {
+                    dispatch(insertHours({
+                        userId: user.currentUser[0].id, 
+                        hours: minutes
+                    }))
+                }
             }
             setProx(true)
         }
@@ -70,6 +72,7 @@ export default function ClockIn_Page() {
         }
         dispatch(fetchAllUsers())
         dispatch(fetchHours(user.currentUser[0].id))
+        dispatch(fetchUsers({userId:user.currentUser[0].id}))
         
     },[])
     //--------------------------------AFTER CLOCK IN----------------------------------------
@@ -77,6 +80,12 @@ export default function ClockIn_Page() {
         if (user.currentUser.length > 0) {
             dispatch(fetchUsers({userId:user.currentUser[0].id}))
             dispatch(fetchHours({userId:user.currentUser[0].id}))
+            const one = hours.hours.filter((el)=>{return el.inout === true}).map((el)=>parseInt(el.clocked))
+            const two = hours.hours.filter((el)=>{return el.inout === false}).map((el)=>parseInt(el.clocked))
+            const three = one.map((el,id)=>{return el - two[id]})
+            const four = three.reduce((a,b)=>a+b,0)
+            const min = Math.round(four / (1000 * 60))
+            setMinutes(min)
         }
         setTimeout(() => {
             dispatch(setRegError(''))
@@ -84,7 +93,6 @@ export default function ClockIn_Page() {
     },[user.regerror])
     
     
-    console.log(hours)
     //-------------------------------------COMPONENT----------------------------------------
     return(
         <div className="flex flex-column justify-center">
@@ -95,7 +103,7 @@ export default function ClockIn_Page() {
                     {user.currentUser[0]?.isin ? 'Clock Out' : 'Clock In'}
                 </button>
                 <div className={`${parks.className} text-2xl`}>{user.currentUser[0]?.name}</div>
-                <div className="text-2xl">{hours.hours[0]?.inout ? `${hrs}h ${min}min` : 'In'}</div>
+                <div className="text-2xl">{hours.hours[0]?.inout && minutes ? `${Math.floor(minutes / 60)}h ${Math.round(minutes % 60)}min` : 'In'}</div>
             </div>
             <div className="w-full text-center">{user.regerror}</div>
             <ul>

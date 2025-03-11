@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { setRegError } from "./passSlice";
 
 const initialState = {
     hours: [],
@@ -30,6 +31,10 @@ export const addHour =(obj)=> async dispatch => {
     await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addHour',{obj}).then((resp)=>{dispatch(setError(resp.data.message))})
 }
 
-export const clearHours =()=> async dispatch => {
-    await axios.get(process.env.NEXT_PUBLIC_URL + '/api/clearHours').then((resp)=>{dispatch(setError(resp.data.message))})
+export const clearHours =(obj)=> async dispatch => {
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/clearHours',{obj}).then((resp)=>{dispatch(setRegError(resp.data.message))})
+}
+
+export const insertHours =(obj)=> async dispatch => {
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/insertHours',{obj}).then((resp)=>{dispatch(setRegError(resp.data.message))})
 }
