@@ -13,7 +13,7 @@ export default function HourItemComponent({el}) {
             <div>{el.name}</div>
             <div>{el.email}</div>
             <div>{hour}:{minute < 10 ? 0 : null}{minute} {day}</div>
-            <div>{el.inout ? 'Out' : 'In'}</div>
+            <div>{el.inout ? 'In' : 'Out'}</div>
         </li>
     )
 }

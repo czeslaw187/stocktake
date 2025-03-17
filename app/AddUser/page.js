@@ -2,7 +2,7 @@
 
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchAllUsers, setRegError } from "../lib/features/passSlice"
+import { fetchAllUsers, fetchUsers, setRegError } from "../lib/features/passSlice"
 import UserItem from "./Components/UserItem"
 import NavBar from "../Components/Navbar"
 import { Henny_Penny, Bangers } from "next/font/google"
@@ -38,7 +38,7 @@ export default function AddUser() {
         }, 3000);
         dispatch(fetchAllUsers())
     },[error.regerror])
-
+    console.log(error)
     return(
         <div>
             <NavBar />

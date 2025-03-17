@@ -19,7 +19,6 @@ export default function UserItem({el}) {
     function toggle() {
         setReveal(!reveal)
     }
-    console.log(el)
     return(
         <li className={`h-auto md:h-[6rem] my-3 grid grid-cols-1 md:grid-cols-7 justify-items-center place-items-center shadow-md text-lg ${bangers.className} ${el.isin ? 'shadow-green-600' : 'shadow-red-600'}`}>
             <div>{el.name}</div>

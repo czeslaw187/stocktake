@@ -4,6 +4,7 @@ import { Client } from "pg";
 export async function POST(req) {
     const data = await req.json()
     const {userId, isIn} = data.obj
+    console.log(data.obj)
     const client = new Client(process.env.DB_URL)
     await client.connect()
     try {
