@@ -25,7 +25,7 @@ export default function NavBar() {
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        if (!admin.isLogged || !admin.currentUser) {
+        if (!admin.isLogged || !admin.currentUser[0]) {
             dispatch(clear_food())
             router.push('/')
         }
@@ -48,12 +48,12 @@ export default function NavBar() {
                     <Nav className="ml-auto divide-y-4 w-[100%] md:w-[20%]" navbar>
                         <NavItem hidden={admin.isAdmin ? false : true}>
                             <NavLink href={'/AddUser'} className={`${bangers.className} text-right mr-2`}>
-                                <div className="text-xl">Add User</div>
+                                <div className="text-xl">Users</div>
                             </NavLink>
                         </NavItem>
                         <NavItem hidden={admin.isAdmin ? false : true}>
                             <NavLink href={'/AddCategory'} className={`${bangers.className} text-right mr-2`}>
-                                <div className="text-xl">Add Category</div>
+                                <div className="text-xl">Categories</div>
                             </NavLink>
                         </NavItem>
                         <NavItem>

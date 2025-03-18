@@ -76,9 +76,7 @@ export default function ClockIn_Page() {
 
     //--------------------------------AFTER CLOCK IN----------------------------------------
     useEffect(() => {
-        
         return () => {
-
             if (hours.hours.length % 2 === 0) {
                 const min = getMinutes()
                 setMinutes(min)
@@ -94,7 +92,6 @@ export default function ClockIn_Page() {
         }, 3000);
     },[user.regerror])
 
-    console.log(hours.hours)    
     //-------------------------------------COMPONENT----------------------------------------
     return(
         <Suspense fallback={<div>Loading...</div>}>

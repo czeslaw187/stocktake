@@ -2,7 +2,7 @@ import { Bangers } from "next/font/google"
 import TrashUserModal from "./TrashUserModal"
 import { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faEyeSlash, faEye, faStopwatch } from "@fortawesome/free-solid-svg-icons"
+import { faEyeSlash, faEye, faStopwatch, faPersonDigging } from "@fortawesome/free-solid-svg-icons"
 import ClearHoursModal from "./ClearHoursModal"
 
 const bangers = Bangers({
@@ -19,6 +19,7 @@ export default function UserItem({el}) {
     function toggle() {
         setReveal(!reveal)
     }
+    
     return(
         <li className={`h-auto md:h-[6rem] my-3 grid grid-cols-1 md:grid-cols-7 justify-items-center place-items-center shadow-md text-lg ${bangers.className} ${el.isin ? 'shadow-green-600' : 'shadow-red-600'}`}>
             <div>{el.name}</div>
@@ -31,7 +32,7 @@ export default function UserItem({el}) {
             </div>
             <div>Admin {el.isadmin ? 'Yes' : 'No'}</div>
             <div>{`${hrs}h ${min}min`}</div>
-            <ClearHoursModal el={el} faStopwatch={faStopwatch} FontAwesomeIcon={FontAwesomeIcon} />
+            {el.isin ? <FontAwesomeIcon icon={faPersonDigging} /> : <ClearHoursModal el={el} faStopwatch={faStopwatch} FontAwesomeIcon={FontAwesomeIcon} />}
             {el.isadmin ? null : <TrashUserModal el={el} />}
         </li>
     )
