@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import SignOut from "./SignOut";
 import { useRouter } from "next/navigation";
 import { setLogin } from "../lib/features/passSlice";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { clear_food, fetchCategories } from "../lib/features/countSlice";
 import { Bangers } from "next/font/google";
 
@@ -42,7 +41,7 @@ export default function NavBar() {
     return(
         <div className="bg-gradient-to-bl from-amber-300 to-indigo-400">
             <Navbar>
-                <NavbarBrand href="/Main">{admin.isAdmin ? 'ADMIN' : admin.currentUser[0]?.name}</NavbarBrand>
+                <NavbarBrand href="/Main">{admin.currentUser[0].workplace} {admin.isAdmin ? 'ADMIN' : admin.currentUser[0]?.name}</NavbarBrand>
                 <NavbarToggler onClick={toggle}/>
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto divide-y-4 w-[100%] md:w-[20%]" navbar>
@@ -54,6 +53,11 @@ export default function NavBar() {
                         <NavItem hidden={admin.isAdmin ? false : true}>
                             <NavLink href={'/AddCategory'} className={`${bangers.className} text-right mr-2`}>
                                 <div className="text-xl">Categories</div>
+                            </NavLink>
+                        </NavItem>
+                        <NavItem hidden={admin.isAdmin ? false : true}>
+                            <NavLink href={'/AddWorkplace'} className={`${bangers.className} text-right mr-2`}>
+                                <div className="text-xl">Workplace</div>
                             </NavLink>
                         </NavItem>
                         <NavItem>
