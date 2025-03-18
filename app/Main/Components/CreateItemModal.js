@@ -18,7 +18,7 @@ export default function CreateItemModal({slug}) {
     }
 
     function handleChange(e) {
-        setItem({...item,[e.target.name]:e.target.value,category: slug, quantity:0})
+        setItem({...item,[e.target.name]:e.target.value,category: slug, quantity:0, workplace: user.currentUser[0].workplace})
     }
 
     function handleAddItem(e) {

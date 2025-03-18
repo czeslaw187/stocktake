@@ -25,12 +25,14 @@ export default function Main_Page() {
 
   const store = useSelector(state=>state.count)
   const entries = useSelector(state=>state.entry)
+  const user = useSelector(state=>state.pass)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchEntries())
+    dispatch(fetchEntries({workplace: user.currentUser[0].workplace}))
   }, []);
-
+  // console.log(user.users.map(el=>el.workplace).filter((el,id,self)=>self.indexOf(el) === id))
+  console.log([...new Set(user.users.map(el=>el.workplace))])
   return(
     <div>
       <NavBar />

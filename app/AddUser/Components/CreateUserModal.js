@@ -19,7 +19,7 @@ export default function CreateUserModal({bangers}) {
     }
 
     function handleChange(e) {
-        setCreds({...creds,[e.target.name]:e.target.value, isadmin: false, clock: '', hours: 0, isin: false, workplace: user.currentUser[0].workplace})
+        setCreds({...creds,[e.target.name]:e.target.value, isadmin: false, clock: '', hours: 0, isin: false})
     }
 
     function handleSubmit() {
@@ -49,7 +49,7 @@ export default function CreateUserModal({bangers}) {
                             <Label for="email">Email</Label>
                             <Input name="email" type="email" onChange={(e)=>{handleChange(e)}} value={creds.email || ''} required/>
                             <Label for="workplace">Workplace</Label>
-                            <Input name="workplace" onChange={(e)=>{handleChange(e)}} value={user.currentUser[0].workplace || ''} disabled required />
+                            <Input name="workplace" placeholder={user.currentUser[0]?.workplace} onChange={(e)=>{handleChange(e)}} value={creds.workplace || ''} required />
                             <Label for="password">Password</Label>
                             <Input name="password" type="password" onChange={(e)=>{handleChange(e)}} value={creds.password || ''} required/>
                             <Label for="password2">Repeat Password</Label>

@@ -32,7 +32,7 @@ export default function UpdateFoodModal({el}) {
                 setError('')
             }, 3000);
         } else {
-            dispatch(updateFoodItem({quantity:qnt, id:id, date:now, name:user.currentUser[0].name, product:el.name, amount:deduct, unit:el.unit,}))
+            dispatch(updateFoodItem({quantity:qnt, id:id, date:now, name:user.currentUser[0].name, product:el.name, amount:deduct, unit:el.unit, workplace:user.currentUser[0].workplace}))
             toggle()
         }
         
@@ -47,8 +47,7 @@ export default function UpdateFoodModal({el}) {
             setAmount(parseInt(amount)-1)
         }
     }
-
-    console.log(user,'amount')
+    console.log(el)
     return(
         <div>
             <button className="w-full h-max transition duration-200 ease-out hover:opacity-75"

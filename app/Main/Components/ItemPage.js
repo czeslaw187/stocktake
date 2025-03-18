@@ -15,10 +15,10 @@ const henpen = Henny_Penny({
 
 export default function ItemPage({slug}) {
 
+    const user = useSelector(state=>state.pass)
     const cat = useSelector(state=>state.count)
     const dispatch = useDispatch()
-    const filtered = cat.food.filter((it)=>{return it.category === slug})
-    const user = useSelector(state=>state.pass)
+    const filtered = cat.food.filter((it)=>{return it.category === slug && it.workplace === user.currentUser[0].workplace})
 
     useEffect(()=>{
         dispatch(fetchAllFood())
@@ -26,7 +26,7 @@ export default function ItemPage({slug}) {
             dispatch(set_error(''))
         }, 3000);
     },[cat.error])
-
+    
     return(
         <div className="w-full flex flex-col justify-center">
             <NavBar />

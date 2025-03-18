@@ -17,7 +17,7 @@ export default function ClearHoursModal({el, faStopwatch, FontAwesomeIcon}) {
         dispatch(clearHours({userId: el.id}))
         toggle()
     }
-    console.log(el.isin)
+
     return(
         <div>
             <button onClick={toggle}>
