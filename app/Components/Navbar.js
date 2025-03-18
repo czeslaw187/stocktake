@@ -41,7 +41,7 @@ export default function NavBar() {
     return(
         <div className="bg-gradient-to-bl from-amber-300 to-indigo-400">
             <Navbar>
-                <NavbarBrand href="/Main">{admin.currentUser[0].workplace} {admin.isAdmin ? 'ADMIN' : admin.currentUser[0]?.name}</NavbarBrand>
+                <NavbarBrand href="/Main">{admin.currentUser[0]?.workplace} {admin.isAdmin ? 'ADMIN' : admin.currentUser[0]?.name}</NavbarBrand>
                 <NavbarToggler onClick={toggle}/>
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto divide-y-4 w-[100%] md:w-[20%]" navbar>

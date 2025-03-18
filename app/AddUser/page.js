@@ -38,7 +38,6 @@ export default function AddUser() {
         }, 3000);
         dispatch(fetchAllUsers())
     },[error.regerror])
-    console.log(error)
     return(
         <div>
             <NavBar />

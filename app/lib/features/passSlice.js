@@ -65,3 +65,7 @@ export const addUser =(obj)=> async dispatch => {
 export const clockIn =(obj)=> async dispatch => {
     await axios.post(process.env.NEXT_PUBLIC_URL + '/api/clockIn',{obj}).then((resp)=>{dispatch(setRegError(resp.data.message))})
 }
+
+export const insertWorkplace =(obj)=> async dispatch => {
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/insertWorkplace',{obj}).then((resp)=>{dispatch(setRegError(resp.data.message))})
+}

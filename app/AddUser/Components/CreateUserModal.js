@@ -8,6 +8,7 @@ import { addUser, setRegError } from "@/app/lib/features/passSlice";
 export default function CreateUserModal({bangers}) {
 
     const error = useSelector(state=>state.pass.regerror)
+    const user = useSelector(state=>state.pass)
     const [modal,setModal] = useState(false)
     const [creds,setCreds] = useState({})
     const dispatch = useDispatch()
@@ -18,7 +19,7 @@ export default function CreateUserModal({bangers}) {
     }
 
     function handleChange(e) {
-        setCreds({...creds,[e.target.name]:e.target.value, isadmin: false, clock: '', hours: 0, isin: false})
+        setCreds({...creds,[e.target.name]:e.target.value, isadmin: false, clock: '', hours: 0, isin: false, workplace: user.currentUser[0].workplace})
     }
 
     function handleSubmit() {
@@ -31,7 +32,6 @@ export default function CreateUserModal({bangers}) {
             toggle()
         }
     }
-
     return(
         <div className={`w-[15rem] h-[4rem] flex justify-center place-content-center rounded-md bg-gradient-to-br from-slate-300 to-cyan-300 hover:to-cyan-500 active:shadow-slate-600 active:shadow-inner ${bangers.className}`}>
             <button onClick={toggle}>
@@ -48,6 +48,8 @@ export default function CreateUserModal({bangers}) {
                             <Input name="name" onChange={(e)=>{handleChange(e)}} value={creds.name || ''} required/>
                             <Label for="email">Email</Label>
                             <Input name="email" type="email" onChange={(e)=>{handleChange(e)}} value={creds.email || ''} required/>
+                            <Label for="workplace">Workplace</Label>
+                            <Input name="workplace" onChange={(e)=>{handleChange(e)}} value={user.currentUser[0].workplace || ''} disabled required />
                             <Label for="password">Password</Label>
                             <Input name="password" type="password" onChange={(e)=>{handleChange(e)}} value={creds.password || ''} required/>
                             <Label for="password2">Repeat Password</Label>
