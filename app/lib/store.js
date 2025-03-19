@@ -8,13 +8,13 @@ import entryReducer from './features/entrySlice'
 import hoursReducer from './features/hoursSlice'
 
 const migrations = {
-  1: (state)=> {
+  2: (state)=> {
     return {
       ...state,
       device: undefined
     }
   },
-  2: (state)=> {
+  3: (state)=> {
     return {
       device: state.device
     }
@@ -23,7 +23,7 @@ const migrations = {
 
 const persistConfig = {
   key: 'primary',
-  version: 2,
+  version: 3,
   storage,
   migrate: createMigrate(migrations, {debug: false})
 }

@@ -47,7 +47,6 @@ export default function UpdateFoodModal({el}) {
             setAmount(parseInt(amount)-1)
         }
     }
-    console.log(el)
     return(
         <div>
             <button className="w-full h-max transition duration-200 ease-out hover:opacity-75"

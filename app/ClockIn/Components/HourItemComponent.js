@@ -10,10 +10,11 @@ export default function HourItemComponent({el}) {
 
     return(
         <li className="w-[90%] h-auto py-2 mx-auto grid grid-cols-1 md:grid-cols-4 justify-items-start md:justify-items-center">
-            <div>{el.name}</div>
+            <div className="text-lg font-bold">{el.name}</div>
             <div>{el.email}</div>
-            <div>{hour}:{minute < 10 ? 0 : null}{minute} {day}</div>
-            <div>{el.inout ? 'In' : 'Out'}</div>
+            <div className='underline md:no-underline italic'>{hour}:{minute < 10 ? 0 : null}{minute} {day}</div>
+            <div className="text-xl font-bold">{el.inout ? 'In' : 'Out'}</div>
+            <div className="md:col-span-4 text-lef justify-self-start">{el.address}</div>
         </li>
     )
 }

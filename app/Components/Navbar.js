@@ -55,11 +55,6 @@ export default function NavBar() {
                                 <div className="text-xl">Categories</div>
                             </NavLink>
                         </NavItem>
-                        <NavItem hidden={admin.isAdmin ? false : true}>
-                            <NavLink href={'/AddWorkplace'} className={`${bangers.className} text-right mr-2`}>
-                                <div className="text-xl">Workplace</div>
-                            </NavLink>
-                        </NavItem>
                         <NavItem>
                             <NavLink href={'/ClockIn'} className={`${bangers.className} text-right mr-2`}>
                                 <div className="text-xl">Clock In</div>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import NavBar from "../Components/Navbar";
 import { Suspense, useEffect, useState } from "react";
 import { Luckiest_Guy, Parkinsans } from "next/font/google";
-import { clockIn, fetchAllUsers, fetchUsers, setRegError } from "../lib/features/passSlice";
+import { clockIn, fetchAllUsers, fetchUsers, reverseGeo, setRegError } from "../lib/features/passSlice";
 import HourItemComponent from "./Components/HourItemComponent";
 import { addHour, fetchHours, insertHours } from "../lib/features/hoursSlice";
 
@@ -24,8 +24,6 @@ export default function ClockIn_Page() {
     const dispatch = useDispatch()
     const [position,setPosition] = useState({})
     const [prox,setProx] = useState(false)
-    // const hase = [53.72441,-0.43560]
-    const hase = [53.73937, -0.37347]
 
     function getMinutes() {
         let one = hours.hours.filter((el)=>{return el.inout === true}).map((el)=>parseInt(el.clocked))
@@ -48,7 +46,8 @@ export default function ClockIn_Page() {
             name: user.currentUser[0].name,
             email: user.currentUser[0].email,
             clock: Date.now(),
-            inout: !user.currentUser[0].isin
+            inout: !user.currentUser[0].isin,
+            address: user.address
         }))
         if (minutes > 0) {
             dispatch(insertHours({
@@ -64,10 +63,10 @@ export default function ClockIn_Page() {
         
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position,error)=>{
-                setPosition({
-                    latitude: Math.round((position.coords.latitude + Number.EPSILON) * 100000) / 100000,
-                    longitude: Math.round((position.coords.longitude + Number.EPSILON) * 100000) / 100000
-                })
+                dispatch(reverseGeo({
+                    latitude: Math.round((position.coords.latitude + Number.EPSILON) * 10000) / 10000,
+                    longitude: Math.round((position.coords.longitude + Number.EPSILON) * 10000) / 10000
+                }))
             })
         } else {
             dispatch(setRegError('Position error'))
@@ -91,7 +90,7 @@ export default function ClockIn_Page() {
             dispatch(setRegError(''))
         }, 3000);
     },[user.regerror])
-
+    console.log(hours.hours)
     //-------------------------------------COMPONENT----------------------------------------
     return(
         <Suspense fallback={<div>Loading...</div>}>

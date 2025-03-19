@@ -9,6 +9,7 @@ const initialState = {
     isAdmin: false,
     isLogged: false,
     isIn: false,
+    address: {}
 }
 
 export const passSlice = createSlice({
@@ -35,11 +36,14 @@ export const passSlice = createSlice({
         },
         setIsIn: (state, action)=> {
             state.isIn = action.payload
+        },
+        setAddress: (state, action)=> {
+            state.address = action.payload
         }
     }
 })
 
-export const {getUsers, getCurrentUser, setAdmin, setLogin, setSignError, setRegError, setIsIn } = passSlice.actions
+export const {getUsers, getCurrentUser, setAdmin, setLogin, setSignError, setRegError, setIsIn, setAddress } = passSlice.actions
 export default passSlice.reducer
 
 export const fetchAllUsers =()=> async dispatch => {
@@ -68,4 +72,8 @@ export const clockIn =(obj)=> async dispatch => {
 
 export const insertWorkplace =(obj)=> async dispatch => {
     await axios.post(process.env.NEXT_PUBLIC_URL + '/api/insertWorkplace',{obj}).then((resp)=>{dispatch(setRegError(resp.data.message))})
+}
+
+export const reverseGeo =(obj)=> async dispatch => {
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/reverseGeo',{obj}).then((resp)=>{dispatch(setAddress(resp.data))})
 }
