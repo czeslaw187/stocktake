@@ -9,7 +9,7 @@ export default function HourItemComponent({el}) {
     const minute = new Date(parseInt(el.clocked)).getMinutes()
 
     return(
-        <li className="w-[90%] h-auto py-2 mx-auto grid grid-cols-1 md:grid-cols-4 justify-items-start md:justify-items-center">
+        <li className="w-[90%] h-auto p-2 mx-auto grid grid-cols-1 md:grid-cols-4 justify-items-start md:justify-items-center rounded shadow-md shadow-zinc-500">
             <div className="text-lg font-bold">{el.name}</div>
             <div>{el.email}</div>
             <div className='underline md:no-underline italic'>{hour}:{minute < 10 ? 0 : null}{minute} {day}</div>
