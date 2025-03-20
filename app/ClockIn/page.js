@@ -22,11 +22,10 @@ export default function ClockIn_Page() {
     const user = useSelector(state=>state.pass)
     const hours = useSelector(state=>state.hours)
     const [minutes,setMinutes] = useState(0)
-    const [selected,setSelected] = useState('')
     const dispatch = useDispatch()
     const [position,setPosition] = useState({})
     const [prox,setProx] = useState(false)
-    const filtered = selected ? hours.hours.filter(el=>el.name===selected) : hours.hours
+    // const filtered = selected ? hours.hours.filter((el)=>{return el.name===selected}) : hours.hours
 
     function getMinutes() {
         let one = hours.hours.filter((el)=>{return el.inout === true}).map((el)=>parseInt(el.clocked))
@@ -61,6 +60,7 @@ export default function ClockIn_Page() {
     }
     //--------------------------------------ON PAGE LOAD-------------------------------------------------
     useEffect(()=>{
+        dispatch(fetchAllUsers())
         dispatch(fetchUsers({userId: user.currentUser[0].id}))
         dispatch(fetchHours({userId: user.currentUser[0].id}))
         
@@ -93,8 +93,6 @@ export default function ClockIn_Page() {
             dispatch(setRegError(''))
         }, 3000);
     },[user.regerror])
-    console.log(user)
-
     //-------------------------------------COMPONENT----------------------------------------
     return(
         <Suspense fallback={<div>Loading...</div>}>
@@ -109,10 +107,10 @@ export default function ClockIn_Page() {
                     <div className="text-2xl">{!hours.hours[0]?.inout ? `${Math.floor(minutes / 60)}h ${Math.round(minutes % 60)}min` : 'In'}</div>
                 </div>
                 <div className="w-full text-center">{user.regerror}</div>
-                {user.isAdmin ? <UserList selected={selected} setSelected={setSelected}/> : null}
+                {user.isAdmin ? <UserList /> : null}
                 <ul className="pl-0">
                 {
-                    filtered && filtered.map((el,id)=>{
+                    hours.hours && hours.hours.map((el,id)=>{
                         return(
                             <HourItemComponent key={id} el={el} />
                         )
