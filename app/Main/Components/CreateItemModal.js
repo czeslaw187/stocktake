@@ -11,6 +11,7 @@ export default function CreateItemModal({slug}) {
     const store = useSelector(state=>state.count)
     const user = useSelector(state=>state.pass)
     const {food, error} = store
+    const places = [...new Set(user.users.map(el=>el.workplace))]
 
     function toggle() {
         setModal(!modal)
@@ -18,7 +19,7 @@ export default function CreateItemModal({slug}) {
     }
 
     function handleChange(e) {
-        setItem({...item,[e.target.name]:e.target.value,category: slug, quantity:0, workplace: user.currentUser[0].workplace})
+        setItem({...item,[e.target.name]:e.target.value,category: slug, quantity:0})
     }
 
     function handleAddItem(e) {
@@ -30,7 +31,7 @@ export default function CreateItemModal({slug}) {
         }, 3000);
     }
 
-    console.log(item)
+    console.log(store)
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
     return(
         <div className="w-full text-center">
@@ -48,6 +49,16 @@ export default function CreateItemModal({slug}) {
                         <FormGroup>
                             <Label for='name'>Name</Label>
                             <Input name='name' onChange={(e)=>{handleChange(e)}} value={item.name || ''} required/>
+                            <Label for='workplace' onChange={(e)=>{handleChange(e)}} value={item.workplace || ''}>Workplace</Label>
+                            <Input name="workplace" type="select" onChange={(e)=>{handleChange(e)}} value={item.workplace || ''}>
+                                {
+                                    places && places.map((el,id)=>{
+                                        return(
+                                            <option key={id}>{el}</option>
+                                        )
+                                    })
+                                }
+                            </Input>
                             <Label for='unit'>Unit</Label>
                             <Input name='unit' onChange={(e)=>{handleChange(e)}} value={item.unit || ''} required/>
                             <Label for='qantity'>Quantity</Label>

@@ -7,7 +7,7 @@ export default function UserList() {
 
     const user = useSelector(state=>state.pass)
     const hours = useSelector(state=>state.hours)
-    const [name,setName] = useState(user.currentUser[0].name)
+    const [name,setName] = useState(user.currentUser[0]?.name)
     const dispatch = useDispatch()
 
     function handleSelect(el) {
