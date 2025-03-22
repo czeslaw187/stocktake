@@ -15,7 +15,7 @@ export async function POST(req) {
             return new Response(JSON.stringify({isLogged: false, isadmin: false, message: 'Password don\'t match with our records'}))
         }
     } catch (error) {
-        return new Response(JSON.stringify({message: error.message}))
+        return new Response(JSON.stringify({message: 'Password don\'t match with our records'}))
     } finally {
         client.end()
     }

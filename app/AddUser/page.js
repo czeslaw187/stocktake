@@ -7,8 +7,6 @@ import UserItem from "./Components/UserItem"
 import NavBar from "../Components/Navbar"
 import { Henny_Penny, Bangers } from "next/font/google"
 import CreateUserModal from "./Components/CreateUserModal"
-import ClearHoursModal from "./Components/ClearHoursModal"
-import { fetchHours } from "../lib/features/hoursSlice"
 
 const henPen = Henny_Penny({
     subsets: ['latin'],

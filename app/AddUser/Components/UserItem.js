@@ -21,7 +21,8 @@ export default function UserItem({el}) {
     }
     
     return(
-        <li className={`h-auto md:h-[6rem] my-3 grid grid-cols-1 md:grid-cols-7 justify-items-center place-items-center shadow-md text-lg ${bangers.className} ${el.isin ? 'shadow-green-600' : 'shadow-red-600'}`}>
+        <li className={`h-auto md:h-[6rem] my-3 grid grid-cols-1 md:grid-cols-8 justify-items-center place-items-center shadow-md text-lg ${bangers.className} ${el.isin ? 'shadow-green-600' : 'shadow-red-600'}`}>
+            <div>{el.workplace}</div>
             <div>{el.name}</div>
             <div>{el.email}</div>
             <div className="flex">
