@@ -23,7 +23,7 @@ export default function UserList() {
                     {
                         user.users && user.users.map((el,id)=>{
                             return(
-                                <DropdownItem key={id} onClick={()=>{handleSelect(el)}}>{el.name}</DropdownItem>
+                                <DropdownItem key={id} onClick={()=>{handleSelect(el)}}>{el.name} ({el.workplace})</DropdownItem>
                             )
                         })
                     }

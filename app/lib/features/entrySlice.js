@@ -19,7 +19,7 @@ export const entrySlice = createSlice({
     }
 })
 
-export const {get_entries} = entrySlice.actions
+export const {get_entries, set_error} = entrySlice.actions
 export default entrySlice.reducer
 
 export const fetchEntries =(obj)=> async dispatch => {
