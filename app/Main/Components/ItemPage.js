@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import CreateItemModal from "./CreateItemModal";
 import RenderedItemComponent from "./RenderedItemComponent";
 import { Henny_Penny } from "next/font/google";
-import { fetchAllUsers } from "@/app/lib/features/passSlice";
+import { fetchAllUsers, setRegError } from "@/app/lib/features/passSlice";
 import WorkList from "./WorkList";
+import { Label } from "reactstrap";
 
 const henpen = Henny_Penny({
     subsets: ['latin'],
@@ -30,7 +31,7 @@ export default function ItemPage({slug}) {
     useEffect(()=>{
         dispatch(fetchAllFood())
         setTimeout(() => {
-            dispatch(set_error(''))
+            dispatch(setRegError(''))
         }, 3000);
     },[cat.error])
     
@@ -38,6 +39,7 @@ export default function ItemPage({slug}) {
         <div className="w-full flex flex-col justify-center">
             <NavBar />
             <div className={`text-center text-3xl my-2 ${henpen.className}`}>{slug}</div>
+            <Label className="w-full text-center text-black text-xl font-bold">{user.regerror}</Label>
                 {user.isAdmin ? <CreateItemModal slug={slug} /> : null}
                 {user.isAdmin ? <WorkList place={place} setPlace={setPlace}/> : null}
                 <ul className="w-full h-max text-center flex flex-row flex-wrap pl-0">

@@ -10,7 +10,7 @@ export default function CreateItemModal({slug}) {
     const dispatch = useDispatch()
     const store = useSelector(state=>state.count)
     const user = useSelector(state=>state.pass)
-    const {food, error} = store
+    const food = store.food
     const places = [...new Set(user.users.map(el=>el.workplace))]
 
     function toggle() {
@@ -31,7 +31,6 @@ export default function CreateItemModal({slug}) {
         }, 3000);
     }
 
-    console.log(store)
     const closeBtn = (<button className="ml-auto font-bold" onClick={toggle}>X</button>)
     return(
         <div className="w-full text-center">
@@ -39,7 +38,7 @@ export default function CreateItemModal({slug}) {
                     onClick={toggle}>
                 Add new {slug}
             </button>
-            <Label className="w-full text-center text-red">{error}</Label>
+            
             <Modal isOpen={modal} toggle={toggle} backdrop={false}>
                 <ModalHeader close={closeBtn}>
                     <div>Describe New {slug}</div>

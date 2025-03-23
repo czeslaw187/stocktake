@@ -40,14 +40,17 @@ export const fetchAllFood =()=> async dispatch => {
 }
 
 export const addFoodItem =(obj)=> async dispatch => {
+    dispatch(setRegError('Creating item...'))
     await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addFoodItem',{obj}).then((resp)=>{dispatch(set_error(resp.data.message))})
 }
 
 export const removeFoodItem =(obj)=> async dispatch => {
+    dispatch(setRegError('Removing item...'))
     await axios.post(process.env.NEXT_PUBLIC_URL + '/api/removeFoodItem',{obj}).then((resp)=>{dispatch(set_error(resp.data.message))})
 }
 
 export const updateFoodItem =(obj)=> async dispatch => {
+    dispatch(setRegError('Updating record...'))
     await axios.post(process.env.NEXT_PUBLIC_URL + '/api/updateFoodItem',{obj}).then((resp)=>{dispatch(set_error(resp.data.message))})
 }
 

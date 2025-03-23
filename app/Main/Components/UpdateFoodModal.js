@@ -2,7 +2,6 @@ import { useState } from "react"
 import { Button, ButtonGroup, Label, Modal, ModalBody, ModalHeader } from "reactstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { updateFoodItem } from "@/app/lib/features/countSlice"
-import { fetchUsers } from "@/app/lib/features/passSlice"
 
 export default function UpdateFoodModal({el}) {
 
