@@ -1,4 +1,5 @@
 import { deleteCategory, set_error } from "@/app/lib/features/countSlice"
+import { setRegError } from "@/app/lib/features/passSlice"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
@@ -19,7 +20,10 @@ export default function TrashCategoryModal({el, filtered}) {
         if (filtered.length <= 0) {
             dispatch(deleteCategory(el.id))
         } else {
-            dispatch(set_error('Remove all active elements from category'))
+            dispatch(setRegError('Remove all active elements from category'))
+            setTimeout(() => {
+                dispatch(set_error('4'))
+            }, 3000);
         }
         toggle()
     }

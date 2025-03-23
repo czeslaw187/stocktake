@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchAllUsers, fetchUsers, setRegError } from "../lib/features/passSlice"
 import UserItem from "./Components/UserItem"
@@ -31,10 +31,14 @@ export default function AddUser() {
     },[])
 
     useEffect(()=>{
+        dispatch(fetchAllUsers())
+        console.log('trigger')
+    },[error.signerror])
+
+    useEffect(()=>{
         setTimeout(() => {
             dispatch(setRegError(''))
         }, 3000);
-        dispatch(fetchAllUsers())
     },[error.regerror])
 
     return(

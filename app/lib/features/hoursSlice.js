@@ -28,11 +28,18 @@ export const fetchHours =(obj)=> async dispatch => {
 }
 
 export const addHour =(obj)=> async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addHour',{obj}).then((resp)=>{dispatch(setError(resp.data.message))})
+    dispatch(setRegError('Updating record...'))
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addHour',{obj}).then((resp)=>{
+        dispatch(setError(resp.data.message))
+    })
 }
 
 export const clearHours =(obj)=> async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/clearHours',{obj}).then((resp)=>{dispatch(setRegError(resp.data.message))})
+    dispatch(setRegError('Updating record...'))
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/clearHours',{obj}).then((resp)=>{
+        dispatch(setRegError(resp.data.message))
+        dispatch(setError('5'))
+    })
 }
 
 export const insertHours =(obj)=> async dispatch => {

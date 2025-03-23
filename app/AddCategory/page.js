@@ -8,6 +8,7 @@ import CreateCategoryModal from "./Components/CreateCategoryModal";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from "react";
 import { fetchAllFood, fetchCategories, set_error } from "../lib/features/countSlice";
+import { setRegError } from "../lib/features/passSlice";
 
 
 const henPen = Henny_Penny({
@@ -18,25 +19,31 @@ const henPen = Henny_Penny({
 export default function AddCategoryPage() {
 
     const count = useSelector(state=>state.count)
+    const user = useSelector(state=>state.pass)
+    const hours = useSelector(state=>state.hours)
     const categories = count.categories
-    const error = count.error
+    const error = user.regerror
     const dispatch = useDispatch()
-
-    useEffect(()=>{
-        setTimeout(() => {
-            dispatch(set_error(''))
-        }, 3000);
-        if (count?.food) {
-            dispatch(fetchCategories())
-            dispatch(fetchAllFood())
-        }
-    },[error])
 
     useEffect(()=>{
         if (categories) {
             dispatch(fetchCategories())
         }
     },[])
+
+    useEffect(()=>{
+        console.log('error')
+        dispatch(fetchCategories())
+        dispatch(fetchAllFood())
+        setTimeout(() => {
+            dispatch(setRegError(''))
+        }, 3000);
+        
+    },[count.error])
+
+    useEffect(()=>{
+        dispatch(setRegError(''))
+    },[hours.error])
 
     return(
         <div>

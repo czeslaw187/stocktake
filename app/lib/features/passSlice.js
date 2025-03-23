@@ -47,8 +47,11 @@ export const {getUsers, getCurrentUser, setAdmin, setLogin, setSignError, setReg
 export default passSlice.reducer
 
 export const fetchAllUsers =()=> async dispatch => {
-    dispatch(setSignError('Loading...'))
-    await axios.get(process.env.NEXT_PUBLIC_URL + '/api/fetchAllUsers').then((resp)=>{dispatch(getUsers(resp.data))})
+    dispatch(setRegError('Fetching users...'))
+    await axios.get(process.env.NEXT_PUBLIC_URL + '/api/fetchAllUsers').then((resp)=>{
+        dispatch(getUsers(resp.data))
+        dispatch(setSignError('3'))
+    })
 }
 
 export const fetchUsers =(obj)=> async dispatch => {
@@ -67,14 +70,23 @@ export const checkSignIn =(obj)=> async dispatch => {
 }
 
 export const removeUser =(obj)=> async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/removeUser',{obj}).then((resp)=>{dispatch(setRegError(resp.data.message))})
+    dispatch(setRegError('Updating records...'))
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/removeUser',{obj}).then((resp)=>{
+        dispatch(setRegError(resp.data.message))
+        dispatch(setSignError('1'))
+    })
 }
 
 export const addUser =(obj)=> async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addUser',{obj}).then((resp)=>{dispatch(setRegError(resp.data.message))})
+    dispatch(setRegError('Creating user...'))
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/addUser',{obj}).then((resp)=>{
+        dispatch(setRegError(resp.data.message))
+        dispatch(setSignError('1'))
+    })
 }
 
 export const clockIn =(obj)=> async dispatch => {
+    dispatch(setRegError('Clockin...'))
     await axios.post(process.env.NEXT_PUBLIC_URL + '/api/clockIn',{obj}).then((resp)=>{dispatch(setRegError(resp.data.message))})
 }
 

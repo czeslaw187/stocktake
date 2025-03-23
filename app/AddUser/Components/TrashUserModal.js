@@ -1,4 +1,3 @@
-import { deleteCategory, set_error } from "@/app/lib/features/countSlice"
 import { removeUser } from "@/app/lib/features/passSlice"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
