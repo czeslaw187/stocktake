@@ -47,6 +47,7 @@ export const {getUsers, getCurrentUser, setAdmin, setLogin, setSignError, setReg
 export default passSlice.reducer
 
 export const fetchAllUsers =()=> async dispatch => {
+    dispatch(setSignError('Loading...'))
     await axios.get(process.env.NEXT_PUBLIC_URL + '/api/fetchAllUsers').then((resp)=>{dispatch(getUsers(resp.data))})
 }
 
@@ -55,7 +56,14 @@ export const fetchUsers =(obj)=> async dispatch => {
 }
 
 export const checkSignIn =(obj)=> async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/signIn',{obj}).then((resp)=>{dispatch(getCurrentUser(resp.data.users)); dispatch(setLogin(resp.data.isLogged)); dispatch(setAdmin(resp.data.isadmin)); dispatch(setSignError(resp.data.message))})
+    dispatch(setSignError('Please wait...'))
+    await axios.post(process.env.NEXT_PUBLIC_URL + '/api/signIn',{obj}).
+    then((resp)=>{
+        dispatch(getCurrentUser(resp.data.users)); 
+        dispatch(setLogin(resp.data.isLogged)); 
+        dispatch(setAdmin(resp.data.isadmin)); 
+        dispatch(setSignError(resp.data.message))
+    })
 }
 
 export const removeUser =(obj)=> async dispatch => {

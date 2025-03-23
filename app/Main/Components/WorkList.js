@@ -8,8 +8,6 @@ export default function WorkList({place, setPlace}) {
     const hours = useSelector(state=>state.hours)
     const dispatch = useDispatch()
 
-    
-    console.log(hours)
     return(
         <div className="w-[90%] flex gap-5 mx-auto my-3 justify-self-center">
             <UncontrolledDropdown direction="right">

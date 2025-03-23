@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./StoreProvider";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +26,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased w-screen min-h-screen bg-gradient-to-br bg-no-repeat from-cyan-400 to-lime-200`}
       >
-        <StoreProvider>{children}</StoreProvider>
+        <Suspense fallback={<div>Loading...</div>}>
+          <StoreProvider>{children}</StoreProvider>
+        </Suspense>
       </body>
     </html>
   );
